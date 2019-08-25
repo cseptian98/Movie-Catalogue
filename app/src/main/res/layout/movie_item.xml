@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:id="@+id/rvMovie"
+    android:padding="20dp" >
+
+    <ImageView
+        android:id="@+id/pic_movie"
+        android:layout_width="140dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/judul_film"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tv_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_toEndOf="@id/pic_movie"
+        android:text="@string/judul_film"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_Title"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/pic_movie"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="@string/release" />
+
+    <TextView
+        android:id="@+id/tv_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_Title"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/tvDate"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="@string/release" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDate"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="10dp"
+        android:maxLength="100"
+        android:layout_toRightOf="@id/pic_movie"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="Overview" />
+
+    <TextView
+        android:id="@+id/readMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvOverview"
+        android:layout_marginStart="27dp"
+        android:layout_toRightOf="@id/pic_movie"
+        android:ellipsize="end"
+        android:textColor="@android:color/holo_green_dark"
+        android:text="@string/read_more" />
+
+
+</RelativeLayout>
