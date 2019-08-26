@@ -30,7 +30,7 @@
         android:layout_below="@id/tv_Title"
         android:layout_marginStart="26dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/pic_movie"
+        android:layout_toEndOf="@id/pic_movie"
         android:ellipsize="end"
         android:maxLines="3"
         android:text="@string/release" />
@@ -42,7 +42,7 @@
         android:layout_below="@id/tv_Title"
         android:layout_marginStart="2dp"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/tvDate"
+        android:layout_toEndOf="@id/tvDate"
         android:ellipsize="end"
         android:maxLines="3"
         android:text="@string/release" />
@@ -58,7 +58,7 @@
         android:layout_toRightOf="@id/pic_movie"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="Overview" />
+        android:text="@string/ringkasan" />
 
     <TextView
         android:id="@+id/readMore"

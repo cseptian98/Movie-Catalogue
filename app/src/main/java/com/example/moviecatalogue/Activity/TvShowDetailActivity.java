@@ -3,6 +3,7 @@ package com.example.moviecatalogue.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,14 +13,8 @@ import com.example.moviecatalogue.TvShow.TvShow;
 
 public class TvShowDetailActivity extends AppCompatActivity {
 
-    public static final String Extra_Poster = "Extra_Poster";
-    public static final String Extra_Judul = "Extra_Judul";
-    public static final String Extra_Rilis = "Extra_Rilis";
-    public static final String Extra_Durasi = "Extra_Durasi";
-    public static final String Extra_Detail = "Extra_Detail";
-
-    private Context context;
-    private TvShow shows;
+    int picShow;
+    String titleShow, rilisShow, durationShow, ovShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +27,20 @@ public class TvShowDetailActivity extends AppCompatActivity {
         TextView tvDurasi = findViewById(R.id.tv_DurasiDetail);
         TextView tvDetail = findViewById(R.id.tv_Overview);
 
-        final String picShow = getIntent().getStringExtra(Extra_Poster);
-        final String judulShow = getIntent().getStringExtra(Extra_Judul);
-        final String rilisShow = getIntent().getStringExtra(Extra_Rilis);
-        final String durasiShow = getIntent().getStringExtra(Extra_Durasi);
-        final String detailShow = getIntent().getStringExtra(Extra_Detail);
+        picShow = getIntent().getIntExtra("imgShow", 999);
+        titleShow = getIntent().getStringExtra("titleShow");
+        rilisShow = getIntent().getStringExtra("rilisShow");
+        durationShow = getIntent().getStringExtra("durationShow");
+        ovShow = getIntent().getStringExtra("ovShow");
 
         Glide.with(this)
                 .load(picShow)
                 .into(imgTvShow);
+        Log.d("aaaa","url"+picShow);
 
-        tvJudul.setText(judulShow);
+        tvJudul.setText(titleShow);
         tvRilis.setText(rilisShow);
-        tvDurasi.setText(durasiShow);
-        tvDetail.setText(detailShow);
+        tvDurasi.setText(durationShow);
+        tvDetail.setText(ovShow);
     }
 }

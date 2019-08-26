@@ -2,19 +2,18 @@ package com.example.moviecatalogue.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.moviecatalogue.R;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    public static final String Extra_Image = "Extra_Image";
-    public static final String Extra_Title = "Extra_Title";
-    public static final String Extra_Release = "Extra_Release";
-    public static final String Extra_Duration = "Extra_Duration";
-    public static final String Extra_Overview = "Extra_Overview";
+    int picMovie;
+    String titleMovie, rilisMovie, durationMovie, ovMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +26,21 @@ public class MovieDetailActivity extends AppCompatActivity {
         TextView tvDuration = findViewById(R.id.tv_DurasiDetail);
         TextView tvOverview = findViewById(R.id.tv_Overview);
 
-        final String picMovie = getIntent().getStringExtra(Extra_Image);
-        final String titleMovie = getIntent().getStringExtra(Extra_Title);
-        final String releaseMovie = getIntent().getStringExtra(Extra_Release);
-        final String durationMovie = getIntent().getStringExtra(Extra_Duration);
-        final String overviewMovie = getIntent().getStringExtra(Extra_Overview);
+        picMovie = getIntent().getIntExtra("imgMovie", 999);
+        titleMovie = getIntent().getStringExtra("titleMovie");
+        rilisMovie = getIntent().getStringExtra("rilisMovie");
+        durationMovie = getIntent().getStringExtra("durationMovie");
+        ovMovie = getIntent().getStringExtra("ovMovie");
 
         Glide.with(this)
                 .load(picMovie)
+                .apply(new RequestOptions().override(365,485))
                 .into(imgMovie);
-        //Log.d("aaaa","url"+picMovie);
+        Log.d("aaaa","url"+picMovie);
 
         tvTitle.setText(titleMovie);
-        tvRelease.setText(releaseMovie);
+        tvRelease.setText(rilisMovie);
         tvDuration.setText(durationMovie);
-        tvOverview.setText(overviewMovie);
+        tvOverview.setText(ovMovie);
     }
 }

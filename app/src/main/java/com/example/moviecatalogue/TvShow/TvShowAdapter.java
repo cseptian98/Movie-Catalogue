@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.Activity.MovieDetailActivity;
 import com.example.moviecatalogue.Activity.TvShowDetailActivity;
 import com.example.moviecatalogue.R;
@@ -41,7 +42,10 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull TvShowAdapter.ViewHolder holder, final int pos) {
 
-        holder.imgShow.setImageResource(tvShows.get(pos).getPoster());
+        Glide.with(context)
+                .load(tvShows.get(pos).getPoster())
+                .into(holder.imgShow);
+
         holder.tvJudulShow.setText(tvShows.get(pos).getJudul());
         holder.tvOverview.setText(tvShows.get(pos).getOverview());
         holder.tvRilisShow.setText(tvShows.get(pos).getRilis());
@@ -54,11 +58,11 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
 
                 Intent intent = new Intent(v.getContext(), TvShowDetailActivity.class);
 
-                intent.putExtra(TvShowDetailActivity.Extra_Poster, item.getPoster());
-                intent.putExtra(TvShowDetailActivity.Extra_Judul, item.getJudul());
-                intent.putExtra(TvShowDetailActivity.Extra_Rilis, item.getRilis());
-                intent.putExtra(TvShowDetailActivity.Extra_Durasi, item.getDurasi());
-                intent.putExtra(TvShowDetailActivity.Extra_Detail, item.getOverview());
+                intent.putExtra("imgShow", item.getPoster());
+                intent.putExtra("titleShow", item.getJudul());
+                intent.putExtra("rilisShow", item.getRilis());
+                intent.putExtra("durationShow", item.getDurasi());
+                intent.putExtra("ovShow", item.getOverview());
 
                 v.getContext().startActivity(intent);
             }

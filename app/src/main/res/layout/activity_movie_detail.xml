@@ -44,7 +44,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/imgMovie"
-                    android:text="Tahun Rilis" />
+                    android:text="@string/release" />
 
                 <TextView
                     android:id="@+id/tv_TglRilisDetail"
@@ -80,7 +80,7 @@
                     android:id="@+id/lblOverview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/penjelasan"
+                    android:text="@string/ringkasan"
                     android:layout_marginTop="10dp"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
@@ -90,7 +90,7 @@
                     android:id="@+id/tv_Overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="@string/penjelasan"
+                    tools:text="@string/ringkasan"
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/lblOverview" />
 

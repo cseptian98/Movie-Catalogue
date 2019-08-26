@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.moviecatalogue.Activity.MovieDetailActivity;
 import com.example.moviecatalogue.R;
 
@@ -40,7 +42,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, final int pos) {
 
-        holder.imgMovie.setImageResource(movies.get(pos).getPic());
+        Glide.with(context)
+                .load(movies.get(pos).getPic())
+                .into(holder.imgMovie);
+
         holder.tvTitle.setText(movies.get(pos).getTitle());
         holder.tvRelease.setText(movies.get(pos).getRelease_date());
         holder.tvOverview.setText(movies.get(pos).getOverview());
@@ -51,15 +56,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
                 Movie item = movies.get(pos);
 
-                Intent intent = new Intent(v.getContext(), MovieDetailActivity.class);
+                Intent intent = new Intent(context, MovieDetailActivity.class);
 
-                intent.putExtra(MovieDetailActivity.Extra_Image, item.getPic());
-                intent.putExtra(MovieDetailActivity.Extra_Title, item.getTitle());
-                intent.putExtra(MovieDetailActivity.Extra_Release, item.getRelease_date());
-                intent.putExtra(MovieDetailActivity.Extra_Duration, item.getDuration());
-                intent.putExtra(MovieDetailActivity.Extra_Overview, item.getOverview());
-
-                v.getContext().startActivity(intent);
+                intent.putExtra("imgMovie", item.getPic());
+                intent.putExtra("titleMovie", item.getTitle());
+                intent.putExtra("rilisMovie", item.getRelease_date());
+                intent.putExtra("durationMovie", item.getDuration());
+                intent.putExtra("ovMovie", item.getOverview());
+                context.startActivity(intent);
             }
         });
     }
