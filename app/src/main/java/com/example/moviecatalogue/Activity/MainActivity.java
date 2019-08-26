@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
+import com.example.moviecatalogue.Fragment.HomeFragment;
 import com.example.moviecatalogue.Movie.Movie;
 import com.example.moviecatalogue.Movie.MovieAdapter;
 import com.example.moviecatalogue.R;
@@ -37,16 +39,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        if (savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).commit();
+        }
         prepare();
         addMovie();
         //addTvShow();
-        rvMovie = findViewById(R.id.movie_list);
-        rvMovie.setHasFixedSize(true);
-
-        rvMovie.setLayoutManager(new LinearLayoutManager(this));
-        MovieAdapter movieAdapter = new MovieAdapter(movies, this);
-        rvMovie.setAdapter(movieAdapter);
 
     }
 

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import com.example.moviecatalogue.Movie.Movie;
 import com.example.moviecatalogue.Movie.MovieAdapter;
 import com.example.moviecatalogue.R;
+import com.example.moviecatalogue.TvShow.TvShow;
+import com.example.moviecatalogue.TvShow.TvShowAdapter;
 
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ public class ShowFragment extends Fragment {
     private RecyclerView rv;
     private RecyclerView.Adapter adapter;
     private View view;
-    private ArrayList<Movie> movies;
+    private ArrayList<TvShow> shows;
 
     public ShowFragment() {
         // Required empty public constructor
@@ -39,7 +41,7 @@ public class ShowFragment extends Fragment {
         rv = view.findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new MovieAdapter(movies,getActivity());
+        adapter = new TvShowAdapter(shows,getActivity());
         rv.setAdapter(adapter);
 
         return view;
