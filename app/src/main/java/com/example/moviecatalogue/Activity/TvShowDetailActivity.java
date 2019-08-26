@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.TvShow.TvShow;
 
@@ -36,6 +37,10 @@ public class TvShowDetailActivity extends AppCompatActivity {
         final String rilisShow = getIntent().getStringExtra(Extra_Rilis);
         final String durasiShow = getIntent().getStringExtra(Extra_Durasi);
         final String detailShow = getIntent().getStringExtra(Extra_Detail);
+
+        Glide.with(this)
+                .load(picShow)
+                .into(imgTvShow);
 
         tvJudul.setText(judulShow);
         tvRilis.setText(rilisShow);

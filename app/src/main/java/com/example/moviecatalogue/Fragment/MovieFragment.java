@@ -44,13 +44,13 @@ public class MovieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_movie, container, false);
-        addMovie();
+
         prepare();
+        addMovie();
 
         rv = view.findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        movies = new ArrayList<>();
         adapter = new MovieAdapter(movies, getActivity());
         rv.setAdapter(adapter);
 

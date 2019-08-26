@@ -34,7 +34,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         final String overviewMovie = getIntent().getStringExtra(Extra_Overview);
 
         Glide.with(this)
-                .load("http://image.tmdb.org/t/p/w300/"+picMovie)
+                .load(picMovie)
                 .into(imgMovie);
         //Log.d("aaaa","url"+picMovie);
 

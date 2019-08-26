@@ -44,13 +44,13 @@ public class ShowFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_show, container, false);
+
         prepare();
         addTvShow();
 
         rv = view.findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        shows = new ArrayList<>();
         adapter = new TvShowAdapter(shows,getActivity());
         rv.setAdapter(adapter);
 
@@ -61,6 +61,8 @@ public class ShowFragment extends Fragment {
         dataJudulShow = getResources().getStringArray(R.array.titleTvShow);
         dataImgShow = getResources().obtainTypedArray(R.array.picShow);
         dataRilisShow = getResources().getStringArray(R.array.rilisShow);
+        dataDurasiShow = getResources().getStringArray(R.array.durasiShow);
+        dataDetailShow = getResources().getStringArray(R.array.ovShow);
     }
 
     private void addTvShow(){
@@ -71,8 +73,8 @@ public class ShowFragment extends Fragment {
             show.setPoster(dataImgShow.getResourceId(i, -1));
             show.setJudul(dataJudulShow[i]);
             show.setRilis(dataRilisShow[i]);
-            //show.setDurasi(dataDurasiShow[i]);
-            //show.setOverview(dataDetailShow[i]);
+            show.setDurasi(dataDurasiShow[i]);
+            show.setOverview(dataDetailShow[i]);
             shows.add(show);
         }
     }

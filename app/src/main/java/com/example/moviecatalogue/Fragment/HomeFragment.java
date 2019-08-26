@@ -19,18 +19,18 @@ import com.example.moviecatalogue.R;
  */
 public class HomeFragment extends Fragment {
 
-    private SectionPagerAdapter sectionPagerAdapter;
-    private ViewPager viewPager;
+    //private SectionPagerAdapter sectionPagerAdapter;
+    //private ViewPager viewPager;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
 
-    @Override
+    /*@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
@@ -44,9 +44,9 @@ public class HomeFragment extends Fragment {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
         return view;
-    }
+    }*/
 
-    public class SectionPagerAdapter extends FragmentPagerAdapter {
+    /*public class SectionPagerAdapter extends FragmentPagerAdapter {
 
         public SectionPagerAdapter(FragmentManager fm){
             super(fm);
@@ -67,6 +67,6 @@ public class HomeFragment extends Fragment {
         public int getCount() {
             return 2;
         }
-    }
+    }*/
 
 }
