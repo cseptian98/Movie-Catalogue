@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.container);
         viewPager.setAdapter(sectionPagerAdapter);
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

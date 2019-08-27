@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".activities.MovieDetailActivity">
+    android:fitsSystemWindows="true"
+    android:background="@color/colorBack"
+    tools:context=".Activity.MovieDetailActivity">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -30,7 +28,7 @@
                     android:layout_marginStart="10dp"
                     android:text="@string/judul_film"
                     android:textSize="20sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorTitle"
                     android:textStyle="bold"
                     android:layout_toEndOf="@+id/imgMovie"/>
 
@@ -40,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_JudulDetail"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorTextDark"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/imgMovie"
@@ -50,6 +48,7 @@
                     android:id="@+id/tv_TglRilisDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorText"
                     tools:text="@string/release"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/imgMovie"
@@ -61,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_TglRilisDetail"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorTextDark"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/imgMovie"
@@ -72,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="@string/durasi"
+                    android:textColor="@color/colorText"
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@+id/imgMovie"
                     android:layout_below="@+id/lblDurasi"/>
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ringkasan"
                     android:layout_marginTop="10dp"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/colorTextDark"
                     android:textSize="18sp"
                     android:layout_below="@+id/imgMovie"/>
 
@@ -92,9 +92,9 @@
                     android:layout_height="wrap_content"
                     tools:text="@string/ringkasan"
                     android:layout_marginStart="10dp"
-                    android:layout_below="@+id/lblOverview" />
+                    android:layout_below="@+id/lblOverview"
+                    android:textColor="@color/colorText"/>
 
             </RelativeLayout>
-        </android.support.constraint.ConstraintLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>
