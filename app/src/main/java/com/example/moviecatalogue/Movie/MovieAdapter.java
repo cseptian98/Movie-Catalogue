@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.moviecatalogue.Activity.MovieDetailActivity;
 import com.example.moviecatalogue.R;
 
@@ -57,12 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 Movie item = movies.get(pos);
 
                 Intent intent = new Intent(context, MovieDetailActivity.class);
-
-                intent.putExtra("imgMovie", item.getPic());
-                intent.putExtra("titleMovie", item.getTitle());
-                intent.putExtra("rilisMovie", item.getRelease_date());
-                intent.putExtra("durationMovie", item.getDuration());
-                intent.putExtra("ovMovie", item.getOverview());
+                intent.putExtra("movie", item);
                 context.startActivity(intent);
             }
         });

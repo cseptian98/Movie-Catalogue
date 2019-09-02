@@ -33,7 +33,6 @@ public class MovieFragment extends Fragment {
     private View view;
     private ArrayList<Movie> movies;
 
-
     public MovieFragment() {
         // Required empty public constructor
     }

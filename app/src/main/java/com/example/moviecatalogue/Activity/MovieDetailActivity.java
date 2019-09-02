@@ -8,12 +8,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.moviecatalogue.Movie.Movie;
 import com.example.moviecatalogue.R;
 
 public class MovieDetailActivity extends AppCompatActivity {
-
-    int picMovie;
-    String titleMovie, rilisMovie, durationMovie, ovMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +24,12 @@ public class MovieDetailActivity extends AppCompatActivity {
         TextView tvDuration = findViewById(R.id.tv_DurasiDetail);
         TextView tvOverview = findViewById(R.id.tv_Overview);
 
-        picMovie = getIntent().getIntExtra("imgMovie", 999);
-        titleMovie = getIntent().getStringExtra("titleMovie");
-        rilisMovie = getIntent().getStringExtra("rilisMovie");
-        durationMovie = getIntent().getStringExtra("durationMovie");
-        ovMovie = getIntent().getStringExtra("ovMovie");
+        Movie movie = getIntent().getParcelableExtra("movie");
 
-        Glide.with(this)
-                .load(picMovie)
-                .apply(new RequestOptions().override(365,485))
-                .into(imgMovie);
-        Log.d("aaaa","url"+picMovie);
-
-        tvTitle.setText(titleMovie);
-        tvRelease.setText(rilisMovie);
-        tvDuration.setText(durationMovie);
-        tvOverview.setText(ovMovie);
+        imgMovie.setImageResource(movie.getPic());
+        tvTitle.setText(movie.getTitle());
+        tvRelease.setText(movie.getRelease_date());
+        tvDuration.setText(movie.getDuration());
+        tvOverview.setText(movie.getOverview());
     }
 }

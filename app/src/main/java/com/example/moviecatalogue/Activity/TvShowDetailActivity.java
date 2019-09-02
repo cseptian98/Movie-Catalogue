@@ -1,20 +1,14 @@
 package com.example.moviecatalogue.Activity;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.TvShow.TvShow;
 
 public class TvShowDetailActivity extends AppCompatActivity {
-
-    int picShow;
-    String titleShow, rilisShow, durationShow, ovShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +21,12 @@ public class TvShowDetailActivity extends AppCompatActivity {
         TextView tvDurasi = findViewById(R.id.tv_DurasiDetail);
         TextView tvDetail = findViewById(R.id.tv_Overview);
 
-        picShow = getIntent().getIntExtra("imgShow", 999);
-        titleShow = getIntent().getStringExtra("titleShow");
-        rilisShow = getIntent().getStringExtra("rilisShow");
-        durationShow = getIntent().getStringExtra("durationShow");
-        ovShow = getIntent().getStringExtra("ovShow");
+        TvShow tvShow = getIntent().getParcelableExtra("tvShow");
 
-        Glide.with(this)
-                .load(picShow)
-                .into(imgTvShow);
-        Log.d("aaaa","url"+picShow);
-
-        tvJudul.setText(titleShow);
-        tvRilis.setText(rilisShow);
-        tvDurasi.setText(durationShow);
-        tvDetail.setText(ovShow);
+        imgTvShow.setImageResource(tvShow.getPoster());
+        tvJudul.setText(tvShow.getJudul());
+        tvRilis.setText(tvShow.getRilis());
+        tvDurasi.setText(tvShow.getDurasi());
+        tvDetail.setText(tvShow.getOverview());
     }
 }
