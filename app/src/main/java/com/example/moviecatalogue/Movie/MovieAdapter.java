@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.Activity.MovieDetailActivity;
 import com.example.moviecatalogue.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private ArrayList<Movie> movies;
 
     public void setMovies(ArrayList<Movie> movies){
-        this.movies = movies;
+        movies.clear();
+        movies.addAll(movies);
+        notifyDataSetChanged();
     }
 
     public MovieAdapter(ArrayList<Movie> movieData, Context context){
@@ -41,8 +44,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, final int pos) {
 
-        Glide.with(context)
-                .load(movies.get(pos).getPic())
+        String imgUrl = "https://image.tmdb.org/t/p/w185/";
+
+        Picasso.with(context)
+                .load(imgUrl+movies.get(pos).getPic())
                 .into(holder.imgMovie);
 
         holder.tvTitle.setText(movies.get(pos).getTitle());
@@ -56,7 +61,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 Movie item = movies.get(pos);
 
                 Intent intent = new Intent(context, MovieDetailActivity.class);
-                intent.putExtra("movie", item);
+
+                intent.putExtra(MovieDetailActivity.Extra_Id, item.getId());
+                intent.putExtra(MovieDetailActivity.Extra_Image, item.getPic());
+                intent.putExtra(MovieDetailActivity.Extra_Title, item.getTitle());
+                intent.putExtra(MovieDetailActivity.Extra_Release, item.getRelease_date());
+                intent.putExtra(MovieDetailActivity.Extra_Overview, item.getOverview());
+                intent.putExtra(MovieDetailActivity.Extra_Rate, item.getRate());
+                intent.putExtra(MovieDetailActivity.Extra_Backdrop, item.getBackdrop());
+
                 context.startActivity(intent);
             }
         });

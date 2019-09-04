@@ -3,54 +3,99 @@ package com.example.moviecatalogue.TvShow;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONObject;
+
 public class TvShow implements Parcelable {
-    private int poster;
-    private String judul;
-    private String rilis;
-    private String durasi;
-    private String overview;
+    private int id;
+    private String imgShow;
+    private String titleShow;
+    private String releaseShow;
+    private String rateShow;
+    private String overviewShow;
+    private String backShow;
 
-    public String getDurasi() {
-        return durasi;
+    public TvShow(JSONObject object) {
+        try {
+            int id = object.getInt("id");
+            String poster = object.getString("poster_path");
+            String title = object.getString("name");
+            String overview = object.getString("overview");
+            String release = object.getString("first_air_date");
+            String rate = object.getString("vote_average");
+            String backdrop = object.getString("backdrop_path");
+
+            this.id = id;
+            this.imgShow = poster;
+            this.titleShow = title;
+            this.overviewShow = overview;
+            this.releaseShow = release;
+            this.rateShow = rate;
+            this.backShow = backdrop;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
     }
 
-    public void setDurasi(String durasi) {
-        this.durasi = durasi;
+    public int getId() {
+        return id;
     }
 
-    public int getPoster() {
-        return poster;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPoster(int poster) {
-        this.poster = poster;
+    public String getImgShow() {
+        return imgShow;
     }
 
-    public String getJudul() {
-        return judul;
+    public void setImgShow(String imgShow) {
+        this.imgShow = imgShow;
     }
 
-    public void setJudul(String judul) {
-        this.judul = judul;
+    public String getTitleShow() {
+        return titleShow;
     }
 
-    public String getOverview() {
-        return overview;
+    public void setTitleShow(String titleShow) {
+        this.titleShow = titleShow;
     }
 
-    public void setOverview(String overview) {
-        this.overview = overview;
+    public String getReleaseShow() {
+        return releaseShow;
+    }
+
+    public void setReleaseShow(String releaseShow) {
+        this.releaseShow = releaseShow;
+    }
+
+    public String getRateShow() {
+        return rateShow;
+    }
+
+    public void setRateShow(String rateShow) {
+        this.rateShow = rateShow;
+    }
+
+    public String getOverviewShow() {
+        return overviewShow;
+    }
+
+    public void setOverviewShow(String overviewShow) {
+        this.overviewShow = overviewShow;
+    }
+
+    public String getBackShow() {
+        return backShow;
+    }
+
+    public void setBackShow(String backShow) {
+        this.backShow = backShow;
     }
 
     public TvShow() {
-    }
-
-    public String getRilis() {
-        return rilis;
-    }
-
-    public void setRilis(String rilis) {
-        this.rilis = rilis;
     }
 
     @Override
@@ -60,19 +105,23 @@ public class TvShow implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.poster);
-        dest.writeString(this.judul);
-        dest.writeString(this.rilis);
-        dest.writeString(this.durasi);
-        dest.writeString(this.overview);
+        dest.writeInt(this.id);
+        dest.writeString(this.imgShow);
+        dest.writeString(this.titleShow);
+        dest.writeString(this.releaseShow);
+        dest.writeString(this.rateShow);
+        dest.writeString(this.overviewShow);
+        dest.writeString(this.backShow);
     }
 
     protected TvShow(Parcel in) {
-        this.poster = in.readInt();
-        this.judul = in.readString();
-        this.rilis = in.readString();
-        this.durasi = in.readString();
-        this.overview = in.readString();
+        this.id = in.readInt();
+        this.imgShow = in.readString();
+        this.titleShow = in.readString();
+        this.releaseShow = in.readString();
+        this.rateShow = in.readString();
+        this.overviewShow = in.readString();
+        this.backShow = in.readString();
     }
 
     public static final Creator<TvShow> CREATOR = new Creator<TvShow>() {

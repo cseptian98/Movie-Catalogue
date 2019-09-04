@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.moviecatalogue.Activity.MovieDetailActivity;
 import com.example.moviecatalogue.Activity.TvShowDetailActivity;
 import com.example.moviecatalogue.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,9 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     private ArrayList<TvShow> tvShows;
 
     public void setTvShow(ArrayList<TvShow> tvShows){
-        this.tvShows = tvShows;
+        tvShows.clear();
+        tvShows.addAll(tvShows);
+        notifyDataSetChanged();
     }
 
     public TvShowAdapter(ArrayList<TvShow> showData, Context context){
@@ -35,20 +39,22 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view =LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TvShowAdapter.ViewHolder holder, final int pos) {
 
-        Glide.with(context)
-                .load(tvShows.get(pos).getPoster())
+        String imgUrl = "https://image.tmdb.org/t/p/w185/";
+
+        Picasso.with(context)
+                .load(imgUrl+tvShows.get(pos).getImgShow())
                 .into(holder.imgShow);
 
-        holder.tvJudulShow.setText(tvShows.get(pos).getJudul());
-        holder.tvOverview.setText(tvShows.get(pos).getOverview());
-        holder.tvRilisShow.setText(tvShows.get(pos).getRilis());
+        holder.tvTitleShow.setText(tvShows.get(pos).getTitleShow());
+        holder.tvOverviewShow.setText(tvShows.get(pos).getOverviewShow());
+        holder.tvReleaseShow.setText(tvShows.get(pos).getReleaseShow());
 
         holder.itemShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +64,14 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
 
                 Intent intent = new Intent(v.getContext(), TvShowDetailActivity.class);
 
-                intent.putExtra("tvShow", item);
+                intent.putExtra(TvShowDetailActivity.Extra_Id, item.getId());
+                intent.putExtra(TvShowDetailActivity.Extra_Image, item.getImgShow());
+                intent.putExtra(TvShowDetailActivity.Extra_Title, item.getTitleShow());
+                intent.putExtra(TvShowDetailActivity.Extra_Release, item.getReleaseShow());
+                intent.putExtra(TvShowDetailActivity.Extra_Overview, item.getOverviewShow());
+                intent.putExtra(TvShowDetailActivity.Extra_Rate, item.getRateShow());
+                intent.putExtra(TvShowDetailActivity.Extra_Backdrop, item.getBackShow());
+
                 v.getContext().startActivity(intent);
             }
         });
@@ -71,15 +84,15 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgShow;
-        TextView tvJudulShow, tvRilisShow, tvOverview;
+        TextView tvTitleShow, tvReleaseShow, tvOverviewShow;
         RelativeLayout itemShow;
 
         ViewHolder(View itemView) {
             super(itemView);
             imgShow = itemView.findViewById(R.id.pic_movie);
-            tvJudulShow = itemView.findViewById(R.id.tv_Title);
-            tvRilisShow = itemView.findViewById(R.id.tv_Date);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
+            tvTitleShow = itemView.findViewById(R.id.tv_Title);
+            tvReleaseShow = itemView.findViewById(R.id.tv_Date);
+            tvOverviewShow = itemView.findViewById(R.id.tvOverview);
             itemShow = itemView.findViewById(R.id.rvMovie);
         }
     }
