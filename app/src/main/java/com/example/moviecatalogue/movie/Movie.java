@@ -1,9 +1,15 @@
-package com.example.moviecatalogue.Movie;
+package com.example.moviecatalogue.movie;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.moviecatalogue.util.MovieContract;
+
 import org.json.JSONObject;
+
+import static com.example.moviecatalogue.util.MovieContract.getColumnInt;
+import static com.example.moviecatalogue.util.MovieContract.getColumnString;
 
 public class Movie implements Parcelable {
     private int id;
@@ -13,6 +19,19 @@ public class Movie implements Parcelable {
     private String release_date;
     private String overview;
     private String backdrop;
+
+    public Movie() {
+    }
+
+    public Movie(Cursor cursor) {
+        this.id = getColumnInt(cursor, MovieContract.MovieColumns._ID);
+        this.pic = getColumnString(cursor, MovieContract.MovieColumns.Poster);
+        this.title = getColumnString(cursor, MovieContract.MovieColumns.Title);
+        this.overview = getColumnString(cursor, MovieContract.MovieColumns.Overview);
+        this.release_date = getColumnString(cursor, MovieContract.MovieColumns.Release_date);
+        this.rate = getColumnString(cursor, MovieContract.MovieColumns.Rate);
+        this.backdrop = getColumnString(cursor, MovieContract.MovieColumns.Backdrop);
+    }
 
     public Movie(JSONObject object) {
         try {

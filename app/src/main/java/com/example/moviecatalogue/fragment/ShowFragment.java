@@ -1,8 +1,7 @@
-package com.example.moviecatalogue.Fragment;
+package com.example.moviecatalogue.fragment;
 
 
 import android.app.ProgressDialog;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,11 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.moviecatalogue.Movie.Movie;
-import com.example.moviecatalogue.Movie.MovieAdapter;
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.TvShow.TvShow;
-import com.example.moviecatalogue.TvShow.TvShowAdapter;
+import com.example.moviecatalogue.tvshow.TvShow;
+import com.example.moviecatalogue.tvshow.TvShowAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

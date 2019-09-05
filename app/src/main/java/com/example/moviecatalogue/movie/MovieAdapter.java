@@ -1,4 +1,4 @@
-package com.example.moviecatalogue.Movie;
+package com.example.moviecatalogue.movie;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.moviecatalogue.Activity.MovieDetailActivity;
+import com.example.moviecatalogue.activity.MovieDetailActivity;
 import com.example.moviecatalogue.R;
 import com.squareup.picasso.Picasso;
 

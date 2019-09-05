@@ -15,6 +15,13 @@
     <string name="option">Pengaturan</string>
     <string name="nav_drawer_open">Buka Navigasi</string>
     <string name="nav_drawer_close">Tutup Navigasi</string>
+    <string name="add_success">Berhasil Disukai</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="delete">Hapus</string>
+    <string name="acc_delete_movie">Hapus film ini dari daftar favorite ?</string>
+    <string name="delete_success">Film Favorite Dihapus</string>
+    <string name="fav_movie_null">Tidak ada Film Favorite dalam daftar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
