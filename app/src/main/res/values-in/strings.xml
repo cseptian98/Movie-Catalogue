@@ -10,4 +10,12 @@
     <string name="language">Pengaturan Bahasa</string>
     <string name="load">Memuat...</string>
     <string name="rating">Penilaian</string>
+    <string name="home">Beranda</string>
+    <string name="favorite">Disukai</string>
+    <string name="option">Pengaturan</string>
+    <string name="nav_drawer_open">Buka Navigasi</string>
+    <string name="nav_drawer_close">Tutup Navigasi</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
