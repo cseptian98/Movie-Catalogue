@@ -5,14 +5,14 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 public class ShowContract {
-    public static String Show_Favorite = "favorite_show";
+    public static String Show_Favorite = "show";
 
     public static final class ShowColumns implements BaseColumns {
 
         public static String Poster = "poster";
         public static String Backdrop = "backdrop";
-        public static String Name = "title";
-        public static String Release_date = "first_air_date";
+        public static String Title = "title";
+        public static String Release_date = "release_date";
         public static String Rate = "vote_average";
         public static String Overview = "overview";
     }

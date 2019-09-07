@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.tvshow.FavoriteShowAdapter;
 
-import static com.example.moviecatalogue.util.MovieContract.CONTENT_URI;
+import static com.example.moviecatalogue.util.ShowContract.CONTENT_URI;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +37,7 @@ public class FavoriteShowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_movie, container, false);
+        view = inflater.inflate(R.layout.fragment_show, container, false);
 
         rv = view.findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
@@ -53,7 +53,7 @@ public class FavoriteShowFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        new FavoriteShowFragment.loadData().execute();
+        new loadData().execute();
     }
 
     public class loadData extends AsyncTask<Void, Void, Cursor> {
@@ -74,14 +74,6 @@ public class FavoriteShowFragment extends Fragment {
             listShow = show;
             adapter.setListShow(listShow);
             adapter.notifyDataSetChanged();
-
-            if (listShow.getCount() == 0){
-                showSnackbarMessage(getResources().getString(R.string.fav_movie_null));
-            }
         }
-    }
-
-    private void showSnackbarMessage(String message){
-        Snackbar.make(rv, message, Snackbar.LENGTH_SHORT).show();
     }
 }

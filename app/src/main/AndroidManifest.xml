@@ -40,6 +40,12 @@
             android:exported="true"
             android:readPermission="com.example.moviecatalogue.READ_DATABASE"
             android:writePermission="com.example.moviecatalogue.WRITE_DATABASE" />
+        <provider
+            android:authorities="com.example.moviecatalogue"
+            android:name=".provider.TvShowProvider"
+            android:exported="true"
+            android:readPermission="com.example.moviecatalogue.READ_DATABASE"
+            android:writePermission="com.example.moviecatalogue.WRITE_DATABASE" />
 
     </application>
 

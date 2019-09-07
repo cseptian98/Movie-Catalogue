@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.util.ShowHelper;
-import com.example.moviecatalogue.util.ShowContract;
 import com.squareup.picasso.Picasso;
 
 import static android.provider.BaseColumns._ID;
@@ -46,7 +45,6 @@ public class TvShowDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final int showId = getIntent().getIntExtra(Extra_Id, 0);
         ImageView imgTvShow = findViewById(R.id.imgMovie);
         TextView tvTitle = findViewById(R.id.tvTitleDetail);
         TextView tvRelease = findViewById(R.id.tvReleaseDetail);
@@ -54,6 +52,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
         TextView tvOverview = findViewById(R.id.tvOverview);
         ImageView backShow = findViewById(R.id.backMovie);
 
+        final int showId = getIntent().getIntExtra(Extra_Id, 0);
         final String picShow = getIntent().getStringExtra(Extra_Image);
         final String titleShow = getIntent().getStringExtra(Extra_Title);
         final String releaseShow = getIntent().getStringExtra(Extra_Release);
@@ -85,13 +84,13 @@ public class TvShowDetailActivity extends AppCompatActivity {
                 values.put(_ID,showId);
                 values.put(Poster,picShow);
                 values.put(Backdrop,backdropShow);
-                values.put(Name,titleShow);
+                values.put(Title,titleShow);
                 values.put(Release_date,releaseShow);
                 values.put(Rate,rateShow);
                 values.put(Overview,overviewShow);
 
                 if(helper.checkData(showId) == false) {
-                    getContentResolver().insert(ShowContract.CONTENT_URI,values);
+                    getContentResolver().insert(CONTENT_URI,values);
                     fab_fav.setImageResource(R.drawable.ic_star);
                     Snackbar.make(v, getResources().getString(R.string.add_success),Snackbar.LENGTH_SHORT).show();
                 } else {
@@ -115,7 +114,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        getContentResolver().delete(Uri.parse(ShowContract.CONTENT_URI + "/" + showID),null,null);
+                        getContentResolver().delete(Uri.parse(CONTENT_URI + "/" + showID),null,null);
                         fab_fav.setImageResource(R.drawable.ic_star_border);
                         Snackbar.make(v, getResources().getString(R.string.delete_success),Snackbar.LENGTH_SHORT).show();
                     }

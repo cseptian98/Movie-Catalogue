@@ -23,7 +23,7 @@ public class TvShow implements Parcelable {
     public TvShow(Cursor cursor) {
         this.id = getColumnInt(cursor, ShowContract.ShowColumns._ID);
         this.imgShow = getColumnString(cursor, ShowContract.ShowColumns.Poster);
-        this.titleShow = getColumnString(cursor, ShowContract.ShowColumns.Name);
+        this.titleShow = getColumnString(cursor, ShowContract.ShowColumns.Title);
         this.overviewShow = getColumnString(cursor, ShowContract.ShowColumns.Overview);
         this.releaseShow = getColumnString(cursor, ShowContract.ShowColumns.Release_date);
         this.rateShow = getColumnString(cursor, ShowContract.ShowColumns.Rate);

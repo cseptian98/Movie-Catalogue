@@ -59,7 +59,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
 
                 TvShow item = tvShows.get(pos);
 
-                Intent intent = new Intent(v.getContext(), TvShowDetailActivity.class);
+                Intent intent = new Intent(context, TvShowDetailActivity.class);
 
                 intent.putExtra(TvShowDetailActivity.Extra_Id, item.getId());
                 intent.putExtra(TvShowDetailActivity.Extra_Image, item.getImgShow());
@@ -69,7 +69,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
                 intent.putExtra(TvShowDetailActivity.Extra_Rate, item.getRateShow());
                 intent.putExtra(TvShowDetailActivity.Extra_Backdrop, item.getBackShow());
 
-                v.getContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }

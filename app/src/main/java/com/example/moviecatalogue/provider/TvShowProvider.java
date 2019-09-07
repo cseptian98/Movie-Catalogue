@@ -9,8 +9,8 @@ import android.net.Uri;
 import com.example.moviecatalogue.util.ShowContract;
 import com.example.moviecatalogue.util.ShowHelper;
 
-import static com.example.moviecatalogue.util.MovieContract.Author;
-import static com.example.moviecatalogue.util.MovieContract.CONTENT_URI;
+import static com.example.moviecatalogue.util.ShowContract.Author;
+import static com.example.moviecatalogue.util.ShowContract.CONTENT_URI;
 
 public class TvShowProvider extends ContentProvider {
 

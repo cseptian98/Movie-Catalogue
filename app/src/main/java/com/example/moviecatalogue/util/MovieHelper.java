@@ -17,7 +17,7 @@ import static com.example.moviecatalogue.util.MovieContract.Tab_Favorite;
 public class MovieHelper {
 
     private Context context;
-    private MovieDataHelper dbHelper;
+    private ShowDataHelper dbHelper;
     private SQLiteDatabase database;
 
     public MovieHelper(Context context){
@@ -25,7 +25,7 @@ public class MovieHelper {
     }
 
     public MovieHelper open() throws SQLException {
-        dbHelper = new MovieDataHelper(context);
+        dbHelper = new ShowDataHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
     }

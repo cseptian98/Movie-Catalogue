@@ -29,9 +29,9 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
     }
 
     @Override
-    public FavoriteShowAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
-        return new FavoriteShowAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(FavoriteShowAdapter.ViewHolder holder, final int pos) {
@@ -52,7 +52,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(), TvShowDetailActivity.class);
+                Intent intent = new Intent(context, TvShowDetailActivity.class);
 
                 intent.putExtra(TvShowDetailActivity.Extra_Id, show.getId());
                 intent.putExtra(TvShowDetailActivity.Extra_Image, show.getImgShow());
@@ -62,7 +62,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
                 intent.putExtra(TvShowDetailActivity.Extra_Rate, show.getRateShow());
                 intent.putExtra(TvShowDetailActivity.Extra_Backdrop, show.getBackShow());
 
-                v.getContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }
@@ -77,7 +77,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
         if (!listShow.moveToPosition(position)) {
             throw new IllegalStateException("Position invalid");
         }
-        return new TvShow(listShow);
+        return new TvShow (listShow);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

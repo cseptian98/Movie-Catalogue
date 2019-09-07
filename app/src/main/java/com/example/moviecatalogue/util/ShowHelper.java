@@ -47,7 +47,7 @@ public class ShowHelper {
                 TvShow.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
                 TvShow.setImgShow(cursor.getString(cursor.getColumnIndexOrThrow(Poster)));
                 TvShow.setBackShow(cursor.getString(cursor.getColumnIndexOrThrow(Backdrop)));
-                TvShow.setTitleShow(cursor.getString(cursor.getColumnIndexOrThrow(Name)));
+                TvShow.setTitleShow(cursor.getString(cursor.getColumnIndexOrThrow(Title)));
                 TvShow.setReleaseShow(cursor.getString(cursor.getColumnIndexOrThrow(Release_date)));
                 TvShow.setRateShow(cursor.getString(cursor.getColumnIndexOrThrow(Rate)));
                 TvShow.setOverviewShow(cursor.getString(cursor.getColumnIndexOrThrow(Overview)));
