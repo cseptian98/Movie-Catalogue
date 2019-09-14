@@ -15,7 +15,10 @@ import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.activity.MovieDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -50,8 +53,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 .into(holder.imgMovie);
 
         holder.tvTitle.setText(movies.get(pos).getTitle());
-        holder.tvRelease.setText(movies.get(pos).getRelease_date());
-        holder.tvOverview.setText(movies.get(pos).getOverview());
+        String mReleaseDate = movies.get(pos).getRelease_date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(mReleaseDate);
+
+            SimpleDateFormat nDateFormat = new SimpleDateFormat("EEEE, MMM dd, yyyy");
+            String nReleaseDate = nDateFormat.format(date);
+            holder.tvRelease.setText(nReleaseDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.tvRate.setText(movies.get(pos).getRate());
 
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +83,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 intent.putExtra(MovieDetailActivity.Extra_Rate, item.getRate());
                 intent.putExtra(MovieDetailActivity.Extra_Backdrop, item.getBackdrop());
 
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
     }
@@ -81,7 +95,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgMovie;
-        TextView tvTitle, tvRelease, tvOverview;
+        TextView tvTitle, tvRelease, tvRate;
         RelativeLayout item;
 
         ViewHolder(View itemView) {
@@ -89,7 +103,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             imgMovie = itemView.findViewById(R.id.pic_movie);
             tvTitle = itemView.findViewById(R.id.tv_Title);
             tvRelease = itemView.findViewById(R.id.tv_Date);
-            tvOverview = itemView.findViewById(R.id.tvOverview);
+            tvRate = itemView.findViewById(R.id.tvRate);
             item = itemView.findViewById(R.id.rvMovie);
         }
     }

@@ -56,7 +56,7 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
         keyword.onActionViewExpanded();
         keyword.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
+            public boolean onQueryTextSubmit(String query) {
                 String search = keyword.getQuery().toString();
 
                 if(TextUtils.isEmpty(search)) return false;
@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
+            public boolean onQueryTextChange(String newText) {
                 String search = keyword.getQuery().toString();
 
                 if(TextUtils.isEmpty(search)) return false;

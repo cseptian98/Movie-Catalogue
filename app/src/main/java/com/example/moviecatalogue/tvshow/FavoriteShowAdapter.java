@@ -15,6 +15,10 @@ import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.activity.TvShowDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapter.ViewHolder> {
     private Cursor listShow;
     private Context context;
@@ -46,8 +50,19 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
                 .into(holder.imgShow);
 
         holder.tvTitleShow.setText(show.getTitleShow());
-        holder.tvReleaseShow.setText(show.getReleaseShow());
-        holder.tvOverviewShow.setText(show.getOverviewShow());
+        String mReleaseDate = show.getReleaseShow();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(mReleaseDate);
+
+            SimpleDateFormat nDateFormat = new SimpleDateFormat("EEEE, MMM dd, yyyy");
+            String nReleaseDate = nDateFormat.format(date);
+            holder.tvReleaseShow.setText(nReleaseDate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.tvRateShow.setText(show.getRateShow());
 
         holder.itemShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +98,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgShow;
-        TextView tvTitleShow, tvReleaseShow, tvOverviewShow;
+        TextView tvTitleShow, tvReleaseShow, tvRateShow;
         RelativeLayout itemShow;
 
         ViewHolder(View itemView) {
@@ -91,7 +106,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
             imgShow = itemView.findViewById(R.id.pic_movie);
             tvTitleShow = itemView.findViewById(R.id.tv_Title);
             tvReleaseShow = itemView.findViewById(R.id.tv_Date);
-            tvOverviewShow = itemView.findViewById(R.id.tvOverview);
+            tvRateShow = itemView.findViewById(R.id.tvRate);
             itemShow = itemView.findViewById(R.id.rvMovie);
         }
     }
