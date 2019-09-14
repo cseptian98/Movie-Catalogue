@@ -6,8 +6,6 @@ import android.os.Parcelable;
 
 import com.example.favoritemovie.util.DataContract;
 
-import org.json.JSONObject;
-
 import static com.example.favoritemovie.util.DataContract.getColumnInt;
 import static com.example.favoritemovie.util.DataContract.getColumnString;
 

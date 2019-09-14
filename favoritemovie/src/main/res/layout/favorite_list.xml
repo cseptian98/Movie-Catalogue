@@ -45,7 +45,6 @@
         android:layout_marginStart="27dp"
         android:layout_marginTop="10dp"
         android:maxLength="100"
-        android:drawableStart="@drawable/ic_star"
         android:layout_toEndOf="@id/pic_movie"
         android:textColor="@color/colorText"
         android:ellipsize="end"
@@ -63,6 +62,5 @@
         android:ellipsize="end"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/read_more" />
-
 
 </RelativeLayout>
