@@ -57,7 +57,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
         RemoteViews rv = new RemoteViews(nContext.getPackageName(), R.layout.widget_item);
         Bitmap bmp = null;
         try{
-            bmp = Picasso.with(nContext).load("http://image.tmdb.org/t/p/w300/"+listMovie.get(position).getBackdrop()).get();
+            bmp = Picasso.with(nContext).load("https://image.tmdb.org/t/p/w300/"+listMovie.get(position).getBackdrop()).get();
         }
         catch (Exception e){
             e.printStackTrace();

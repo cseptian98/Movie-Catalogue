@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ReleaseTodayReminderService extends BroadcastReceiver {
 
@@ -92,9 +93,10 @@ public class ReleaseTodayReminderService extends BroadcastReceiver {
     }
 
     public void getTodayMovies(final Context context) {
-        String url = "https://api.themoviedb.org/3/movie/upcoming?api_key="+API_KEY+"eb&language=en-US";
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String now = dateFormat.format(Calendar.getInstance().getTime());
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&primary_release_date.gte=" +
+                ""+now+"&primary_release_date.lte="+now+"";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

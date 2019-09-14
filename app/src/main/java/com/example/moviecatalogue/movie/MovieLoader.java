@@ -9,7 +9,9 @@ import com.loopj.android.http.SyncHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -59,7 +61,10 @@ public class MovieLoader extends AsyncTaskLoader<ArrayList<Movie>> {
         SyncHttpClient client = new SyncHttpClient();
 
         final ArrayList<Movie> movieItem = new ArrayList<>();
-        String url = "https://api.themoviedb.org/3/search/movie?api_key="+API_KEY+"&language=en-US&query="+movie;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final String now = dateFormat.format(Calendar.getInstance().getTime());
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&primary_release_date.gte=" +
+                ""+now+"&primary_release_date.lte="+now+"";
 
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
