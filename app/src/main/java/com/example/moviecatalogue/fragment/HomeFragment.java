@@ -42,13 +42,13 @@ public class HomeFragment extends Fragment {
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionPagerAdapter(FragmentManager fm){
+        public SectionPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
                     return new MovieFragment();
                 case 1:

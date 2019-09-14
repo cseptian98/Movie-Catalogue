@@ -10,41 +10,46 @@ import com.example.moviecatalogue.tvshow.TvShow;
 
 import java.util.ArrayList;
 
-import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.ShowContract.Show_Favorite;
-import static com.example.moviecatalogue.util.ShowContract.ShowColumns.*;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Backdrop;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns._ID_Show;
+import static com.example.moviecatalogue.util.DataContract.Tab_Favorite_Show;
 
 public class ShowHelper {
 
     private Context context;
-    private ShowDataHelper dbHelper;
+    private DataHelper dbHelper;
     private SQLiteDatabase database;
 
-    public ShowHelper(Context context){
+    public ShowHelper(Context context) {
         this.context = context;
     }
 
     public ShowHelper open() throws SQLException {
-        dbHelper = new ShowDataHelper(context);
+        dbHelper = new DataHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
     }
 
-    public void close(){
+    public void close() {
         dbHelper.close();
     }
 
-    public ArrayList<TvShow> getData(){
+    public ArrayList<TvShow> getData() {
         Cursor cursor;
-        cursor = database.query(Show_Favorite,null,null,null,null,null,_ID+ " DESC",null);
+        cursor = database.query(Tab_Favorite_Show, null, null, null, null, null, _ID_Show + " DESC", null);
         cursor.moveToFirst();
 
         ArrayList<TvShow> arrayList = new ArrayList<>();
         TvShow TvShow;
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             do {
                 TvShow = new TvShow();
-                TvShow.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
+                TvShow.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID_Show)));
                 TvShow.setImgShow(cursor.getString(cursor.getColumnIndexOrThrow(Poster)));
                 TvShow.setBackShow(cursor.getString(cursor.getColumnIndexOrThrow(Backdrop)));
                 TvShow.setTitleShow(cursor.getString(cursor.getColumnIndexOrThrow(Title)));
@@ -61,11 +66,11 @@ public class ShowHelper {
         return arrayList;
     }
 
-    public boolean checkData(int id){
+    public boolean checkData(int id_show) {
         Cursor cursor;
-        cursor = database.rawQuery("select * from "+Show_Favorite+" where "+_ID+" = "+id+"",null);
+        cursor = database.rawQuery("select * from " + Tab_Favorite_Show + " where " + _ID_Show + " = " + id_show + "", null);
         cursor.moveToFirst();
-        if(cursor.getCount() <= 0){
+        if (cursor.getCount() <= 0) {
             cursor.close();
             return false;
         }
@@ -73,19 +78,23 @@ public class ShowHelper {
         return true;
     }
 
-    public Cursor queryByIdProvider(String id){
-        return database.query(Show_Favorite,null,_ID + " = ?",new String[]{id},null,null,null,null);
+    public Cursor queryByIdProvider(String id_show) {
+        return database.query(Tab_Favorite_Show, null, _ID_Show + " = ?", new String[]{id_show}, null, null, null, null);
     }
-    public Cursor queryProvider(){
-        return database.query(Show_Favorite,null,null,null,null,null,_ID + " DESC");
+
+    public Cursor queryProvider() {
+        return database.query(Tab_Favorite_Show, null, null, null, null, null, _ID_Show + " DESC");
     }
-    public long insertProvider(ContentValues values){
-        return database.insert(Show_Favorite,null,values);
+
+    public long insertProvider(ContentValues values) {
+        return database.insert(Tab_Favorite_Show, null, values);
     }
-    public int updateProvider(String id,ContentValues values){
-        return database.update(Show_Favorite,values,_ID + " = '"+id+"'", null);
+
+    public int updateProvider(String id_show, ContentValues values) {
+        return database.update(Tab_Favorite_Show, values, _ID_Show + " = '" + id_show + "'", null);
     }
-    public int deleteProvider(String id){
-        return database.delete(Show_Favorite, _ID + " = '"+id+"'", null);
+
+    public int deleteProvider(String id_show) {
+        return database.delete(Tab_Favorite_Show, _ID_Show + " = '" + id_show + "'", null);
     }
 }

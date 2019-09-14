@@ -4,7 +4,6 @@ package com.example.moviecatalogue.fragment;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,7 @@ import android.view.ViewGroup;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.tvshow.FavoriteShowAdapter;
 
-import static com.example.moviecatalogue.util.ShowContract.CONTENT_URI;
+import static com.example.moviecatalogue.util.DataContract.CONTENT_URI_SHOW;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,7 +63,7 @@ public class FavoriteShowFragment extends Fragment {
 
         @Override
         public Cursor doInBackground(Void... voids) {
-            return getActivity().getApplicationContext().getContentResolver().query(CONTENT_URI,null,null,null,null);
+            return getActivity().getApplicationContext().getContentResolver().query(CONTENT_URI_SHOW, null, null, null, null);
         }
 
         @Override

@@ -19,12 +19,12 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
     private Cursor listMovie;
     private Context context;
 
-    public FavoriteMovieAdapter(Cursor listMovie, Context context){
+    public FavoriteMovieAdapter(Cursor listMovie, Context context) {
         this.context = context;
         this.listMovie = listMovie;
     }
 
-    public void setListMovie(Cursor listMovie){
+    public void setListMovie(Cursor listMovie) {
         this.listMovie = listMovie;
     }
 
@@ -33,6 +33,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, final int pos) {
 
@@ -41,7 +42,7 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         final Movie movies = getItem(pos);
 
         Picasso.with(context)
-                .load(imgUrl+movies.getPic())
+                .load(imgUrl + movies.getPic())
                 .into(holder.imgMovie);
 
         holder.tvTitle.setText(movies.getTitle());
@@ -73,11 +74,11 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
         return listMovie.getCount();
     }
 
-    private Movie getItem(int position){
+    private Movie getItem(int position) {
         if (!listMovie.moveToPosition(position)) {
             throw new IllegalStateException("Position invalid");
         }
-        return new Movie (listMovie);
+        return new Movie(listMovie);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

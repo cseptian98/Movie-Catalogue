@@ -6,42 +6,47 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-
 import com.example.moviecatalogue.movie.Movie;
 
+import java.util.ArrayList;
+
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.MovieContract.MovieColumns.*;
-import static com.example.moviecatalogue.util.MovieContract.Tab_Favorite;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Backdrop;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Overview;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Poster;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Rate;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Release_date;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Title;
+import static com.example.moviecatalogue.util.DataContract.Tab_Favorite;
 
 public class MovieHelper {
 
     private Context context;
-    private ShowDataHelper dbHelper;
+    private DataHelper dbHelper;
     private SQLiteDatabase database;
 
-    public MovieHelper(Context context){
+    public MovieHelper(Context context) {
         this.context = context;
     }
 
     public MovieHelper open() throws SQLException {
-        dbHelper = new ShowDataHelper(context);
+        dbHelper = new DataHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
     }
 
-    public void close(){
+    public void close() {
         dbHelper.close();
     }
 
-    public ArrayList<Movie> getData(){
+    public ArrayList<Movie> getData() {
         Cursor cursor;
-        cursor = database.query(Tab_Favorite,null,null,null,null,null,_ID+ " DESC",null);
+        cursor = database.query(Tab_Favorite, null, null, null, null, null, _ID + " DESC", null);
         cursor.moveToFirst();
 
         ArrayList<Movie> arrayList = new ArrayList<>();
         Movie Movie;
-        if (cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             do {
                 Movie = new Movie();
                 Movie.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
@@ -61,11 +66,11 @@ public class MovieHelper {
         return arrayList;
     }
 
-    public boolean checkData(int id){
+    public boolean checkData(int id) {
         Cursor cursor;
-        cursor = database.rawQuery("select * from "+Tab_Favorite+" where "+_ID+" = "+id+"",null);
+        cursor = database.rawQuery("select * from " + Tab_Favorite + " where " + _ID + " = " + id + "", null);
         cursor.moveToFirst();
-        if(cursor.getCount() <= 0){
+        if (cursor.getCount() <= 0) {
             cursor.close();
             return false;
         }
@@ -73,20 +78,24 @@ public class MovieHelper {
         return true;
     }
 
-    public Cursor queryByIdProvider(String id){
-        return database.query(Tab_Favorite,null,_ID + " = ?",new String[]{id},null,null,null,null);
+    public Cursor queryByIdProvider(String id) {
+        return database.query(Tab_Favorite, null, _ID + " = ?", new String[]{id}, null, null, null, null);
     }
-    public Cursor queryProvider(){
-        return database.query(Tab_Favorite,null,null,null,null,null,_ID + " DESC");
+
+    public Cursor queryProvider() {
+        return database.query(Tab_Favorite, null, null, null, null, null, _ID + " DESC");
     }
-    public long insertProvider(ContentValues values){
-        return database.insert(Tab_Favorite,null,values);
+
+    public long insertProvider(ContentValues values) {
+        return database.insert(Tab_Favorite, null, values);
     }
-    public int updateProvider(String id,ContentValues values){
-        return database.update(Tab_Favorite,values,_ID + " = '"+id+"'", null);
+
+    public int updateProvider(String id, ContentValues values) {
+        return database.update(Tab_Favorite, values, _ID + " = '" + id + "'", null);
     }
-    public int deleteProvider(String id){
-        return database.delete(Tab_Favorite, _ID + " = '"+id+"'", null);
+
+    public int deleteProvider(String id) {
+        return database.delete(Tab_Favorite, _ID + " = '" + id + "'", null);
     }
 
 }

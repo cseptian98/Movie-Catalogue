@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.moviecatalogue.activity.TvShowDetailActivity;
 import com.example.moviecatalogue.R;
+import com.example.moviecatalogue.activity.TvShowDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,13 +22,13 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     private Context context;
     private ArrayList<TvShow> tvShows;
 
-    public void setTvShow(ArrayList<TvShow> tvShows){
+    public void setTvShow(ArrayList<TvShow> tvShows) {
         tvShows.clear();
         tvShows.addAll(tvShows);
         notifyDataSetChanged();
     }
 
-    public TvShowAdapter(ArrayList<TvShow> showData, Context context){
+    public TvShowAdapter(ArrayList<TvShow> showData, Context context) {
         this.context = context;
         this.tvShows = showData;
     }
@@ -46,7 +46,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
         String imgUrl = "https://image.tmdb.org/t/p/w185/";
 
         Picasso.with(context)
-                .load(imgUrl+tvShows.get(pos).getImgShow())
+                .load(imgUrl + tvShows.get(pos).getImgShow())
                 .into(holder.imgShow);
 
         holder.tvTitleShow.setText(tvShows.get(pos).getTitleShow());

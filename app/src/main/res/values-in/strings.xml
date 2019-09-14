@@ -19,9 +19,12 @@
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="delete">Hapus</string>
-    <string name="acc_delete_movie">Hapus film ini dari daftar favorite ?</string>
-    <string name="delete_success">Film Favorite Dihapus</string>
-    <string name="fav_movie_null">Tidak ada Film Favorite dalam daftar</string>
+    <string name="acc_delete_movie">Hapus film ini dari daftar favorit ?</string>
+    <string name="acc_delete_show">Hapus serial tv ini dari daftar favorit ?</string>
+    <string name="delete_success">Film Favorit Dihapus</string>
+    <string name="delete_success2">Tv Show Favorit Dihapus</string>
+    <string name="fav_movie_null">Tidak ada Film Favorit dalam daftar</string>
+    <string name="fav_show_null">Tidak ada Serial Tv Favorit dalam daftar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

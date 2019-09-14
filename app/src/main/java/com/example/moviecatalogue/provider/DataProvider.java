@@ -6,50 +6,66 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.example.moviecatalogue.util.MovieContract;
+import com.example.moviecatalogue.util.DataContract;
 import com.example.moviecatalogue.util.MovieHelper;
+import com.example.moviecatalogue.util.ShowHelper;
 
-import static com.example.moviecatalogue.util.MovieContract.Author;
-import static com.example.moviecatalogue.util.MovieContract.CONTENT_URI;
+import static com.example.moviecatalogue.util.DataContract.Author;
+import static com.example.moviecatalogue.util.DataContract.Author_Show;
+import static com.example.moviecatalogue.util.DataContract.CONTENT_URI;
 
-public class MovieProvider extends ContentProvider {
+public class DataProvider extends ContentProvider {
 
     private static final int MOVIE = 1;
     private static final int MOVIE_ID = 2;
+    private static final int SHOW = 3;
+    private static final int SHOW_ID = 4;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        sUriMatcher.addURI(Author, MovieContract.Tab_Favorite, MOVIE);
-        sUriMatcher.addURI(Author, MovieContract.Tab_Favorite+ "/#", MOVIE_ID);
+        sUriMatcher.addURI(Author, DataContract.Tab_Favorite, MOVIE);
+        sUriMatcher.addURI(Author, DataContract.Tab_Favorite + "/#", MOVIE_ID);
+
+        sUriMatcher.addURI(Author_Show, DataContract.Tab_Favorite_Show, SHOW);
+        sUriMatcher.addURI(Author_Show, DataContract.Tab_Favorite_Show + "/#", SHOW_ID);
     }
 
     private MovieHelper movieHelper;
+    private ShowHelper showHelper;
 
     @Override
     public boolean onCreate() {
         movieHelper = new MovieHelper(getContext());
         movieHelper.open();
+        showHelper = new ShowHelper(getContext());
+        showHelper.open();
         return true;
     }
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         Cursor cursor;
-        switch(sUriMatcher.match(uri)){
+        switch (sUriMatcher.match(uri)) {
             case MOVIE:
                 cursor = movieHelper.queryProvider();
                 break;
             case MOVIE_ID:
                 cursor = movieHelper.queryByIdProvider(uri.getLastPathSegment());
                 break;
+            case SHOW:
+                cursor = showHelper.queryProvider();
+                break;
+            case SHOW_ID:
+                cursor = showHelper.queryByIdProvider(uri.getLastPathSegment());
+                break;
             default:
                 cursor = null;
                 break;
         }
 
-        if (cursor != null){
-            cursor.setNotificationUri(getContext().getContentResolver(),uri);
+        if (cursor != null) {
+            cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }
 
         return cursor;
@@ -62,12 +78,14 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        long added ;
+        long added;
 
-        switch (sUriMatcher.match(uri)){
+        switch (sUriMatcher.match(uri)) {
             case MOVIE:
                 added = movieHelper.insertProvider(values);
                 break;
+            case SHOW:
+                added = showHelper.insertProvider(values);
             default:
                 added = 0;
                 break;
@@ -84,8 +102,10 @@ public class MovieProvider extends ContentProvider {
         int deleted;
         switch (sUriMatcher.match(uri)) {
             case MOVIE_ID:
-                deleted =  movieHelper.deleteProvider(uri.getLastPathSegment());
+                deleted = movieHelper.deleteProvider(uri.getLastPathSegment());
                 break;
+            case SHOW_ID:
+                deleted = showHelper.deleteProvider(uri.getLastPathSegment());
             default:
                 deleted = 0;
                 break;
@@ -100,11 +120,13 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        int updated ;
+        int updated;
         switch (sUriMatcher.match(uri)) {
             case MOVIE_ID:
-                updated =  movieHelper.updateProvider(uri.getLastPathSegment(),values);
+                updated = movieHelper.updateProvider(uri.getLastPathSegment(), values);
                 break;
+            case SHOW_ID:
+                updated = showHelper.updateProvider(uri.getLastPathSegment(), values);
             default:
                 updated = 0;
                 break;

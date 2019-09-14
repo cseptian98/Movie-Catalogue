@@ -4,23 +4,28 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.util.ShowHelper;
 import com.squareup.picasso.Picasso;
 
-import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.ShowContract.CONTENT_URI;
-import static com.example.moviecatalogue.util.ShowContract.ShowColumns.*;
+import static com.example.moviecatalogue.util.DataContract.CONTENT_URI_SHOW;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Backdrop;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.util.DataContract.ShowColumns._ID_Show;
 
 public class TvShowDetailActivity extends AppCompatActivity {
 
@@ -72,7 +77,7 @@ public class TvShowDetailActivity extends AppCompatActivity {
         helper = new ShowHelper(this);
         helper.open();
 
-        if(helper.checkData(showId)){
+        if (helper.checkData(showId)) {
             fab_fav.setImageResource(R.drawable.ic_star);
         }
 
@@ -81,24 +86,25 @@ public class TvShowDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 ContentValues values = new ContentValues();
-                values.put(_ID,showId);
-                values.put(Poster,picShow);
-                values.put(Backdrop,backdropShow);
-                values.put(Title,titleShow);
-                values.put(Release_date,releaseShow);
-                values.put(Rate,rateShow);
-                values.put(Overview,overviewShow);
+                values.put(_ID_Show, showId);
+                values.put(Poster, picShow);
+                values.put(Backdrop, backdropShow);
+                values.put(Title, titleShow);
+                values.put(Release_date, releaseShow);
+                values.put(Rate, rateShow);
+                values.put(Overview, overviewShow);
 
-                if(helper.checkData(showId) == false) {
-                    getContentResolver().insert(CONTENT_URI,values);
+                if (!helper.checkData(showId)) {
+                    getContentResolver().insert(CONTENT_URI_SHOW, values);
                     fab_fav.setImageResource(R.drawable.ic_star);
-                    Snackbar.make(v, getResources().getString(R.string.add_success),Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, getResources().getString(R.string.add_success), Snackbar.LENGTH_SHORT).show();
                 } else {
                     showAlertDialog(showId, fab_fav, v);
                 }
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -110,13 +116,13 @@ public class TvShowDetailActivity extends AppCompatActivity {
 
         alertDialogBuilder.setTitle(getResources().getString(R.string.delete));
         alertDialogBuilder
-                .setMessage(getResources().getString(R.string.acc_delete_movie))
+                .setMessage(getResources().getString(R.string.acc_delete_show))
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        getContentResolver().delete(Uri.parse(CONTENT_URI + "/" + showID),null,null);
+                        getContentResolver().delete(Uri.parse(CONTENT_URI_SHOW + "/" + showID), null, null);
                         fab_fav.setImageResource(R.drawable.ic_star_border);
-                        Snackbar.make(v, getResources().getString(R.string.delete_success),Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(v, getResources().getString(R.string.delete_success2), Snackbar.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {

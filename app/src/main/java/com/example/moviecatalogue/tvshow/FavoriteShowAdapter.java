@@ -19,12 +19,12 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
     private Cursor listShow;
     private Context context;
 
-    public FavoriteShowAdapter(Cursor listShow, Context context){
+    public FavoriteShowAdapter(Cursor listShow, Context context) {
         this.context = context;
         this.listShow = listShow;
     }
 
-    public void setListShow(Cursor listShow){
+    public void setListShow(Cursor listShow) {
         this.listShow = listShow;
     }
 
@@ -33,6 +33,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(FavoriteShowAdapter.ViewHolder holder, final int pos) {
 
@@ -41,7 +42,7 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
         final TvShow show = getItem(pos);
 
         Picasso.with(context)
-                .load(imgUrl+show.getImgShow())
+                .load(imgUrl + show.getImgShow())
                 .into(holder.imgShow);
 
         holder.tvTitleShow.setText(show.getTitleShow());
@@ -73,11 +74,11 @@ public class FavoriteShowAdapter extends RecyclerView.Adapter<FavoriteShowAdapte
         return listShow.getCount();
     }
 
-    private TvShow getItem(int position){
+    private TvShow getItem(int position) {
         if (!listShow.moveToPosition(position)) {
             throw new IllegalStateException("Position invalid");
         }
-        return new TvShow (listShow);
+        return new TvShow(listShow);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

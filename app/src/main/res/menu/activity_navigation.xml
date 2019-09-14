@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/home" />
         <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
+            android:title="@string/search_movie" />
+        <item
             android:id="@+id/nav_favorite"
             android:icon="@android:drawable/star_big_off"
             android:title="@string/favorite" />
@@ -20,7 +24,7 @@
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_language"
-                android:title="@string/language" />
+                android:title="@string/setting" />
 
         </menu>
     </item>

@@ -1,6 +1,7 @@
 package com.example.moviecatalogue.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -8,17 +9,17 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.fragment.FavoriteFragment;
 import com.example.moviecatalogue.fragment.HomeFragment;
-import com.example.moviecatalogue.R;
+import com.example.moviecatalogue.fragment.SearchFragment;
 
 public class MainActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).commit();
         }
     }
@@ -71,12 +72,17 @@ public class MainActivity extends AppCompatActivity implements
         if (id == R.id.nav_home) {
             fragment = new HomeFragment();
 
-        } else if (id == R.id.nav_favorite) {
+        } else if (id == R.id.nav_search) {
+            fragment = new SearchFragment();
+            getSupportActionBar().setTitle(getResources().getString(R.string.search_movie));
+        }
+
+        else if (id == R.id.nav_favorite) {
             fragment = new FavoriteFragment();
             getSupportActionBar().setTitle(getResources().getString(R.string.favorite));
 
         } else if (id == R.id.nav_setting) {
-            Intent i = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            Intent i = new Intent(this, SettingActivity.class);
             startActivity(i);
         }
 

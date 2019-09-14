@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.moviecatalogue.activity.MovieDetailActivity;
 import com.example.moviecatalogue.R;
+import com.example.moviecatalogue.activity.MovieDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,13 +22,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private Context context;
     private ArrayList<Movie> movies;
 
-    public void setMovies(ArrayList<Movie> movies){
+    public void setMovies(ArrayList<Movie> items) {
         movies.clear();
-        movies.addAll(movies);
+        movies.addAll(items);
         notifyDataSetChanged();
     }
 
-    public MovieAdapter(ArrayList<Movie> movieData, Context context){
+    public MovieAdapter(ArrayList<Movie> movieData, Context context) {
         this.context = context;
         this.movies = movieData;
     }
@@ -36,7 +36,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view =LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.movie_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -46,7 +46,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         String imgUrl = "https://image.tmdb.org/t/p/w185/";
 
         Picasso.with(context)
-                .load(imgUrl+movies.get(pos).getPic())
+                .load(imgUrl + movies.get(pos).getPic())
                 .into(holder.imgMovie);
 
         holder.tvTitle.setText(movies.get(pos).getTitle());

@@ -4,7 +4,6 @@ package com.example.moviecatalogue.fragment;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,7 @@ import android.view.ViewGroup;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.movie.FavoriteMovieAdapter;
 
-import static com.example.moviecatalogue.util.MovieContract.CONTENT_URI;
+import static com.example.moviecatalogue.util.DataContract.CONTENT_URI;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,14 +71,6 @@ public class FavoriteMovieFragment extends Fragment {
             listMovie = movie;
             adapter.setListMovie(listMovie);
             adapter.notifyDataSetChanged();
-
-            if (listMovie.getCount() == 0){
-                showSnackbarMessage(getResources().getString(R.string.fav_movie_null));
-            }
         }
-    }
-
-    private void showSnackbarMessage(String message){
-        Snackbar.make(rv, message, Snackbar.LENGTH_SHORT).show();
     }
 }

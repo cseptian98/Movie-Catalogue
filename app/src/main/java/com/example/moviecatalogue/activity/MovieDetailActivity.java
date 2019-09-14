@@ -4,22 +4,28 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
+
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.util.MovieHelper;
 import com.squareup.picasso.Picasso;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.MovieContract.CONTENT_URI;
-import static com.example.moviecatalogue.util.MovieContract.MovieColumns.*;
+import static com.example.moviecatalogue.util.DataContract.CONTENT_URI;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Backdrop;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Overview;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Poster;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Rate;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Release_date;
+import static com.example.moviecatalogue.util.DataContract.MovieColumns.Title;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -71,7 +77,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         helper = new MovieHelper(this);
         helper.open();
 
-        if(helper.checkData(movieId)){
+        if (helper.checkData(movieId)) {
             fab_fav.setImageResource(R.drawable.ic_star);
         }
 
@@ -80,24 +86,25 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 ContentValues values = new ContentValues();
-                values.put(_ID,movieId);
-                values.put(Poster,picMovie);
-                values.put(Backdrop,backdropMovie);
-                values.put(Title,titleMovie);
-                values.put(Release_date,releaseMovie);
-                values.put(Rate,rateMovie);
-                values.put(Overview,overviewMovie);
+                values.put(_ID, movieId);
+                values.put(Poster, picMovie);
+                values.put(Backdrop, backdropMovie);
+                values.put(Title, titleMovie);
+                values.put(Release_date, releaseMovie);
+                values.put(Rate, rateMovie);
+                values.put(Overview, overviewMovie);
 
-                if(helper.checkData(movieId) == false) {
-                    getContentResolver().insert(CONTENT_URI,values);
+                if (!helper.checkData(movieId)) {
+                    getContentResolver().insert(CONTENT_URI, values);
                     fab_fav.setImageResource(R.drawable.ic_star);
-                    Snackbar.make(v, getResources().getString(R.string.add_success),Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, getResources().getString(R.string.add_success), Snackbar.LENGTH_SHORT).show();
                 } else {
                     showAlertDialog(movieId, fab_fav, v);
                 }
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -113,9 +120,9 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        getContentResolver().delete(Uri.parse(CONTENT_URI + "/" + movieID),null,null);
+                        getContentResolver().delete(Uri.parse(CONTENT_URI + "/" + movieID), null, null);
                         fab_fav.setImageResource(R.drawable.ic_star_border);
-                        Snackbar.make(v, getResources().getString(R.string.delete_success),Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(v, getResources().getString(R.string.delete_success), Snackbar.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {

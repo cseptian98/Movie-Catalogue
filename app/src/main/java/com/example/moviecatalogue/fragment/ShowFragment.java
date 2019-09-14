@@ -77,7 +77,7 @@ public class ShowFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(response);
 
                     JSONArray array = jsonObject.getJSONArray("results");
-                    for (int i = 0; i < array.length(); i++){
+                    for (int i = 0; i < array.length(); i++) {
 
                         TvShow show = new TvShow(array.getJSONObject(i));
 

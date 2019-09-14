@@ -17,9 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.movie.Movie;
 import com.example.moviecatalogue.movie.MovieAdapter;
-import com.example.moviecatalogue.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,7 +77,7 @@ public class MovieFragment extends Fragment {
                     JSONObject jsonObject = new JSONObject(response);
 
                     JSONArray array = jsonObject.getJSONArray("results");
-                    for (int i = 0; i < array.length(); i++){
+                    for (int i = 0; i < array.length(); i++) {
 
                         Movie movie = new Movie(array.getJSONObject(i));
 
