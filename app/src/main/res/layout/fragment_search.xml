@@ -13,12 +13,12 @@
         android:id="@+id/keyword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listMovie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/movie_item"/>
+        tools:listitem="@layout/movie_item" />
 
 </LinearLayout>

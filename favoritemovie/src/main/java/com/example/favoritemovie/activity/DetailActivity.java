@@ -65,8 +65,8 @@ public class DetailActivity extends AppCompatActivity {
         final String movieOverview = movie.getOverview();
         String movieRate = movie.getRate();
 
-        Picasso.with(context).load("http://image.tmdb.org/t/p/w300/"+moviePoster).into(imgPoster);
-        Picasso.with(context).load("http://image.tmdb.org/t/p/w500/"+movieBackdrop).into(imgBackdrop);
+        Picasso.with(context).load("https://image.tmdb.org/t/p/w300/"+moviePoster).into(imgPoster);
+        Picasso.with(context).load("https://image.tmdb.org/t/p/w500/"+movieBackdrop).into(imgBackdrop);
 
         tvTitle.setText(movieTitle);
         tvOverview.setText(movieOverview);

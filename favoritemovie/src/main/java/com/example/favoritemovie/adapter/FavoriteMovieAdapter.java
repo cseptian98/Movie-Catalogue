@@ -44,7 +44,7 @@ public class FavoriteMovieAdapter extends CursorAdapter {
             tvRate = view.findViewById(R.id.tvRate);
             tvRelease = view.findViewById(R.id.tv_Date);
 
-            String imgUrl = "http://image.tmdb.org/t/p/w185/";
+            String imgUrl = "https://image.tmdb.org/t/p/w185/";
             Picasso.with(context).load(imgUrl+getColumnString(cursor,Poster)).into(imgMovie);
 
             tvTitle.setText(getColumnString(cursor,Title));

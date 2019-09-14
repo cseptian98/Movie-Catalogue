@@ -6,7 +6,6 @@
     <string name="durasi">Duration</string>
     <string name="read_more">Read More</string>
     <string name="movies">MOVIES</string>
-    <string name="tv_show">TV SHOW</string>
     <string name="language">Setting Language</string>
     <string name="load">Loading...</string>
     <string name="rating">Rating</string>
@@ -14,22 +13,11 @@
     <string name="favorite">Favorite</string>
     <string name="option">Option</string>
     <string name="setting">Settings</string>
-    <string name="nav_drawer_open">Open Navigation Drawer</string>
-    <string name="nav_drawer_close">Close Navigation Drawer</string>
     <string name="add_success">Added to Favorite</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="delete">Delete</string>
     <string name="acc_delete_movie">Delete this Movie from Favorite list?</string>
-    <string name="acc_delete_show">Delete this Tv Show from Favorite list?</string>
     <string name="delete_success">Favorite Movie Deleted</string>
-    <string name="delete_success2">Favorite TV Show Deleted</string>
     <string name="fav_movie_null">No Favorite Movie in the list</string>
-    <string name="fav_show_null">No Favorite Tv Show in the list</string>
-    <string name="fav_widget_null">No Favorite Movies have been added</string>
-    <string name="notif_msg_release">Today %s Relase</string>
-    <string name="daily_notif">Daily Reminder</string>
-    <string name="upcoming_notif">Release Today Reminder</string>
-    <string name="notif_msg">Movie Catalogue missing you ...</string>
-    <string name="search_movie">Search Movie</string>
 </resources>
