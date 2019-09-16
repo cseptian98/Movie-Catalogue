@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:background="@color/colorBack"
-    tools:context=".fragment.SearchFragment">
+    tools:context=".fragment.SearchMovieFragment">
 
     <SearchView
         android:hint="@string/search_movie"

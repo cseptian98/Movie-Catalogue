@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.fragment.FavoriteFragment;
 import com.example.moviecatalogue.fragment.HomeFragment;
-import com.example.moviecatalogue.fragment.SearchFragment;
+import com.example.moviecatalogue.fragment.SearchMovieFragment;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
@@ -72,11 +72,13 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new HomeFragment();
 
         } else if (id == R.id.nav_search) {
-            fragment = new SearchFragment();
+            fragment = new SearchMovieFragment();
             getSupportActionBar().setTitle(getResources().getString(R.string.search_movie));
-        }
+        } else if (id == R.id.nav_search_show) {
+            fragment = new SearchMovieFragment();
+            getSupportActionBar().setTitle(getResources().getString(R.string.search_movie));
 
-        else if (id == R.id.nav_favorite) {
+        } else if (id == R.id.nav_favorite) {
             fragment = new FavoriteFragment();
             getSupportActionBar().setTitle(getResources().getString(R.string.favorite));
 

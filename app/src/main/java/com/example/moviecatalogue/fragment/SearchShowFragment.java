@@ -14,23 +14,27 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.movie.Movie;
-import com.example.moviecatalogue.movie.MovieAdapter;
-import com.example.moviecatalogue.movie.MovieLoader;
+import com.example.moviecatalogue.tvshow.TvShow;
+import com.example.moviecatalogue.tvshow.TvShowAdapter;
+import com.example.moviecatalogue.tvshow.TvShowLoader;
 
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Movie>> {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class SearchShowFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<TvShow>> {
 
     RecyclerView listView;
-    MovieAdapter adapter;
+    TvShowAdapter adapter;
     SearchView keyword;
 
-    private ArrayList<Movie> listMovie;
+    private ArrayList<TvShow> listShow;
 
-    static final String Extra_Movie = "Extra_Movie";
+    static final String Extra_Show = "Extra_Show";
 
-    public SearchFragment() {
+
+    public SearchShowFragment() {
         // Required empty public constructor
     }
 
@@ -38,7 +42,6 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         keyword = view.findViewById(R.id.keyword);
@@ -46,9 +49,9 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
 
         listView.setHasFixedSize(true);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        listMovie = new ArrayList<>();
+        listShow = new ArrayList<>();
 
-        adapter = new MovieAdapter(listMovie, getActivity().getApplicationContext());
+        adapter = new TvShowAdapter(listShow, getActivity().getApplicationContext());
         adapter.notifyDataSetChanged();
 
         listView.setAdapter(adapter);
@@ -62,8 +65,8 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
                 if(TextUtils.isEmpty(search)) return false;
 
                 Bundle bundle = new Bundle();
-                bundle.putString(Extra_Movie, search);
-                getLoaderManager().restartLoader(0,bundle, SearchFragment.this);
+                bundle.putString(Extra_Show, search);
+                getLoaderManager().restartLoader(0,bundle, SearchShowFragment.this);
                 return false;
             }
 
@@ -74,39 +77,37 @@ public class SearchFragment extends Fragment implements LoaderManager.LoaderCall
                 if(TextUtils.isEmpty(search)) return false;
 
                 Bundle bundle = new Bundle();
-                bundle.putString(Extra_Movie, search);
-                getLoaderManager().restartLoader(0, bundle, SearchFragment.this);
+                bundle.putString(Extra_Show, search);
+                getLoaderManager().restartLoader(0, bundle, SearchShowFragment.this);
                 return false;
             }
         });
-
         String title = keyword.getQuery().toString();
         Bundle bundle = new Bundle();
-        bundle.putString(Extra_Movie, title);
+        bundle.putString(Extra_Show, title);
 
-        getLoaderManager().initLoader(0, bundle, SearchFragment.this);
+        getLoaderManager().initLoader(0, bundle, SearchShowFragment.this);
 
         return view;
     }
 
     @Override
-    public Loader<ArrayList<Movie>> onCreateLoader(int id, Bundle args){
-        String movie = "";
+    public Loader<ArrayList<TvShow>> onCreateLoader(int id, Bundle args){
+        String shows = "";
         if(args != null){
-            movie = args.getString(Extra_Movie);
+            shows = args.getString(Extra_Show);
         }
 
-        return new MovieLoader(getActivity(), movie);
+        return new TvShowLoader(getActivity(), shows);
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Movie>> loader, ArrayList<Movie> data) {
-        adapter.setMovies(data);
+    public void onLoadFinished(Loader<ArrayList<TvShow>> loader, ArrayList<TvShow> data) {
+        adapter.setTvShow(data);
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList<Movie>> loader){
-        adapter.setMovies(null);
+    public void onLoaderReset(Loader<ArrayList<TvShow>> loader){
+        adapter.setTvShow(null);
     }
-
 }

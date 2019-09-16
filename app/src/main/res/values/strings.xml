@@ -32,4 +32,7 @@
     <string name="upcoming_notif">Release Today Reminder</string>
     <string name="notif_msg">Movie Catalogue missing you ...</string>
     <string name="search_movie">Search Movie</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
