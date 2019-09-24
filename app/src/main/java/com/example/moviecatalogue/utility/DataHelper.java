@@ -1,19 +1,18 @@
-package com.example.moviecatalogue.util;
+package com.example.moviecatalogue.utility;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Backdrop;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Overview;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Poster;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Rate;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Release_date;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Title;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns._ID_Show;
-import static com.example.moviecatalogue.util.DataContract.Tab_Favorite;
-import static com.example.moviecatalogue.util.DataContract.Tab_Favorite_Show;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns._ID_Show;
+import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite;
+import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite_Show;
 
 public class DataHelper extends SQLiteOpenHelper {
 
@@ -23,7 +22,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public static String CREATE_TABLE_FAVORITE = "create table " + Tab_Favorite + "(" +
             _ID + " integer primary key autoincrement, " +
             Poster + " text not null, " +
-            Backdrop + " text not null, " +
             Title + " text not null, " +
             Release_date + " text not null, " +
             Rate + " text not null, " +
@@ -32,7 +30,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public static String CREATE_SHOW_FAVORITE = "create table " + Tab_Favorite_Show + "(" +
             _ID_Show + " integer primary key autoincrement, " +
             Poster + " text not null, " +
-            Backdrop + " text not null, " +
             Title + " text not null, " +
             Release_date + " text not null, " +
             Rate + " text not null, " +

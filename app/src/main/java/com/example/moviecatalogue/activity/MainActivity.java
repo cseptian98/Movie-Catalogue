@@ -2,99 +2,77 @@ package com.example.moviecatalogue.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.fragment.FavoriteFragment;
-import com.example.moviecatalogue.fragment.HomeFragment;
-import com.example.moviecatalogue.fragment.SearchMovieFragment;
+import com.example.moviecatalogue.fragment.MovieFragment;
+import com.example.moviecatalogue.fragment.SearchFragment;
+import com.example.moviecatalogue.fragment.SettingFragment;
+import com.example.moviecatalogue.fragment.ShowFragment;
 
-public class MainActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
+
+    private int backButtonCount;
+
+    private void changeFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment).commit();
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navMovies:
+                    changeFragment(MovieFragment.newInstance());
+                    return true;
+                case R.id.navTvShow:
+                    changeFragment(ShowFragment.newInstance());
+                    return true;
+                case R.id.navSearch:
+                    changeFragment(SearchFragment.newInstance());
+                    return true;
+                case R.id.navFavorite:
+                    changeFragment(FavoriteFragment.newInstance());
+                    return true;
+                case R.id.navSetting:
+                    changeFragment(SettingFragment.newInstance());
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        changeFragment(MovieFragment.newInstance());
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content, new HomeFragment()).commit();
+    public void onBackPressed()
+    {
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press back again to exit.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        Fragment fragment = null;
-
-        if (id == R.id.nav_home) {
-            fragment = new HomeFragment();
-
-        } else if (id == R.id.nav_search) {
-            fragment = new SearchMovieFragment();
-            getSupportActionBar().setTitle(getResources().getString(R.string.search_movie));
-        } else if (id == R.id.nav_search_show) {
-            fragment = new SearchMovieFragment();
-            getSupportActionBar().setTitle(getResources().getString(R.string.search_movie));
-
-        } else if (id == R.id.nav_favorite) {
-            fragment = new FavoriteFragment();
-            getSupportActionBar().setTitle(getResources().getString(R.string.favorite));
-
-        } else if (id == R.id.nav_setting) {
-            Intent i = new Intent(this, SettingActivity.class);
-            startActivity(i);
-        }
-
-        if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
 }
 

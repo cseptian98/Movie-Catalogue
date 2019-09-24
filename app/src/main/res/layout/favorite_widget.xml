@@ -8,14 +8,6 @@
         android:orientation="vertical"
         android:weightSum="10">
 
-        <StackView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/stack_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:loopViews="true"
-            android:background="@color/colorBack"
-            android:layout_weight="5" />
-
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/banner_text"
             android:layout_width="match_parent"
@@ -26,10 +18,16 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:text="@string/favorite"
-            android:textSize="18sp"
-            android:padding="8dp"
             android:gravity="center_vertical|center_horizontal"
             android:layout_weight="1" />
+
+        <StackView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/stack_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:loopViews="true"
+            android:background="@color/colorBack"
+            android:layout_weight="5" />
 
     </LinearLayout>
 

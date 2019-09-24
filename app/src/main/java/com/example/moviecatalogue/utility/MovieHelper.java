@@ -1,4 +1,4 @@
-package com.example.moviecatalogue.util;
+package com.example.moviecatalogue.utility;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,13 +11,8 @@ import com.example.moviecatalogue.movie.Movie;
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Backdrop;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Overview;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Poster;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Rate;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Release_date;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Title;
-import static com.example.moviecatalogue.util.DataContract.Tab_Favorite;
+import static com.example.moviecatalogue.utility.DataContract.MovieColumns.*;
+import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite;
 
 public class MovieHelper {
 
@@ -51,7 +46,6 @@ public class MovieHelper {
                 Movie = new Movie();
                 Movie.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
                 Movie.setPic(cursor.getString(cursor.getColumnIndexOrThrow(Poster)));
-                Movie.setBackdrop(cursor.getString(cursor.getColumnIndexOrThrow(Backdrop)));
                 Movie.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(Title)));
                 Movie.setRelease_date(cursor.getString(cursor.getColumnIndexOrThrow(Release_date)));
                 Movie.setRate(cursor.getString(cursor.getColumnIndexOrThrow(Rate)));

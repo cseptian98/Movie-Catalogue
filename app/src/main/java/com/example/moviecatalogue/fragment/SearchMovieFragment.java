@@ -34,6 +34,10 @@ public class SearchMovieFragment extends Fragment implements LoaderManager.Loade
         // Required empty public constructor
     }
 
+    public static SearchMovieFragment newInstance(){
+        return new SearchMovieFragment();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

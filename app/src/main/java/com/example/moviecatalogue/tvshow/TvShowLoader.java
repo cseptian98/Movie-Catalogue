@@ -52,7 +52,7 @@ public class TvShowLoader extends AsyncTaskLoader<ArrayList<TvShow>> {
         final ArrayList<TvShow> showItem = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String now = dateFormat.format(Calendar.getInstance().getTime());
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&primary_release_date.gte=" +
+        String url = "https://api.themoviedb.org/3/discover/tv?api_key=" + API_KEY + "&primary_release_date.gte=" +
                 "" + now + "&primary_release_date.lte=" + now + "";
 
         client.get(url, new AsyncHttpResponseHandler() {

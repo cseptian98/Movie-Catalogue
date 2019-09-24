@@ -1,20 +1,25 @@
-package com.example.moviecatalogue.activity;
+package com.example.moviecatalogue.fragment;
+
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.settings.Settings;
 import com.example.moviecatalogue.services.DailyReminder;
 import com.example.moviecatalogue.services.UpcomingReminder;
+import com.example.moviecatalogue.settings.Settings;
 
-public class SettingActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class SettingFragment extends Fragment {
 
     private Settings preferences;
 
@@ -24,22 +29,28 @@ public class SettingActivity extends AppCompatActivity {
     DailyReminder dailyReminder;
     UpcomingReminder releaseTodayTask;
 
+    public SettingFragment() {
+        // Required empty public constructor
+    }
+
+    public static SettingFragment newInstance(){
+        return new SettingFragment();
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        getSupportActionBar().setTitle(R.string.setting);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        preferences = new Settings(this);
+        preferences = new Settings(getContext());
 
         dailyReminder = new DailyReminder();
         releaseTodayTask = new UpcomingReminder();
 
-        daily = findViewById(R.id.switch_daily_reminder);
-        release = findViewById(R.id.switch_release_today);
-        language = findViewById(R.id.tv_change_language);
+        daily = view.findViewById(R.id.switch_daily_reminder);
+        release = view.findViewById(R.id.switch_release_today);
+        language = view.findViewById(R.id.tv_change_language);
 
         daily.setChecked(preferences.dailyChecked());
         release.setChecked(preferences.releaseChecked());
@@ -49,10 +60,10 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean checked = daily.isChecked();
                 if(checked){
-                    dailyReminder.setDailyReminder(getApplicationContext(),
+                    dailyReminder.setDailyReminder(getContext(),
                             DailyReminder.Repeating, "07:00", getString(R.string.notif_msg));
                 } else {
-                    dailyReminder.cancelDailyReminder(getApplicationContext(),
+                    dailyReminder.cancelDailyReminder(getContext(),
                             DailyReminder.Repeating);
                 }
                 preferences.SetDailyReminder(checked);
@@ -63,10 +74,10 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean checked = release.isChecked();
                 if(checked) {
-                    releaseTodayTask.setMovieReleaseNotif(getApplicationContext(),
+                    releaseTodayTask.setMovieReleaseNotif(getContext(),
                             UpcomingReminder.Repeating, "08:00");
                 } else {
-                    releaseTodayTask.cancelMovieNotif(getApplicationContext(),
+                    releaseTodayTask.cancelMovieNotif(getContext(),
                             UpcomingReminder.Repeating);
                 }
                 preferences.SetReleaseReminder(checked);
@@ -80,15 +91,7 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if(id == android.R.id.home){
-            onBackPressed();
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+        return view;
     }
 }
+

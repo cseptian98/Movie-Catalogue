@@ -43,6 +43,10 @@ public class ShowFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static ShowFragment newInstance(){
+        return new ShowFragment();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

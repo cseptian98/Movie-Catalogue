@@ -61,8 +61,8 @@ public class MovieLoader extends AsyncTaskLoader<ArrayList<Movie>> {
         SyncHttpClient client = new SyncHttpClient();
 
         final ArrayList<Movie> movieItem = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        final String now = dateFormat.format(Calendar.getInstance().getTime());
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        final String now = date.format(Calendar.getInstance().getTime());
         String url = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&primary_release_date.gte=" +
                 ""+now+"&primary_release_date.lte="+now+"";
 

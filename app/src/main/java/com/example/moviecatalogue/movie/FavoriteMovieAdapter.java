@@ -76,7 +76,6 @@ public class FavoriteMovieAdapter extends RecyclerView.Adapter<FavoriteMovieAdap
                 intent.putExtra(MovieDetailActivity.Extra_Release, movies.getRelease_date());
                 intent.putExtra(MovieDetailActivity.Extra_Overview, movies.getOverview());
                 intent.putExtra(MovieDetailActivity.Extra_Rate, movies.getRate());
-                intent.putExtra(MovieDetailActivity.Extra_Backdrop, movies.getBackdrop());
 
                 context.startActivity(intent);
             }

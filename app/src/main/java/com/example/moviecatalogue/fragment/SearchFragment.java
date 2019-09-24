@@ -10,23 +10,24 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoriteFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
     private SectionPagerAdapter sectionPagerAdapter;
     private ViewPager viewPager;
 
-    public FavoriteFragment() {
+    public SearchFragment() {
         // Required empty public constructor
     }
 
-    public static FavoriteFragment newInstance(){
-        return new FavoriteFragment();
+    public static SearchFragment newInstance(){
+        return new SearchFragment();
     }
 
 
@@ -35,7 +36,7 @@ public class FavoriteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
+        sectionPagerAdapter = new SearchFragment.SectionPagerAdapter(getChildFragmentManager());
 
         viewPager = view.findViewById(R.id.container);
         viewPager.setAdapter(sectionPagerAdapter);
@@ -58,9 +59,9 @@ public class FavoriteFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FavoriteMovieFragment();
+                    return new SearchMovieFragment();
                 case 1:
-                    return new FavoriteShowFragment();
+                    return new SearchShowFragment();
             }
             return null;
         }

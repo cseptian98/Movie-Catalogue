@@ -4,12 +4,12 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.moviecatalogue.util.DataContract;
+import com.example.moviecatalogue.utility.DataContract;
 
 import org.json.JSONObject;
 
-import static com.example.moviecatalogue.util.DataContract.getColumnInt;
-import static com.example.moviecatalogue.util.DataContract.getColumnString;
+import static com.example.moviecatalogue.utility.DataContract.getColumnInt;
+import static com.example.moviecatalogue.utility.DataContract.getColumnString;
 
 public class TvShow implements Parcelable {
     private int id;
@@ -27,7 +27,6 @@ public class TvShow implements Parcelable {
         this.overviewShow = getColumnString(cursor, DataContract.ShowColumns.Overview);
         this.releaseShow = getColumnString(cursor, DataContract.ShowColumns.Release_date);
         this.rateShow = getColumnString(cursor, DataContract.ShowColumns.Rate);
-        this.backShow = getColumnString(cursor, DataContract.ShowColumns.Backdrop);
     }
 
     public TvShow(JSONObject object) {

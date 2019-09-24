@@ -10,16 +10,16 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.services.FavoriteWidgetService;
+import com.example.moviecatalogue.services.FavoriteWidget;
 
-public class FavoriteWidget extends AppWidgetProvider {
+public class FavWidget extends AppWidgetProvider {
 
     public static final String Toast_Act = "com.example.moviecatalogue.Toast_Act";
     public static final String Extra_Item = "com.example.moviecatalogue.Extra_Item";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
 
-        Intent intent = new Intent(context, FavoriteWidgetService.class);
+        Intent intent = new Intent(context, FavoriteWidget.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
@@ -27,8 +27,8 @@ public class FavoriteWidget extends AppWidgetProvider {
         remoteViews.setRemoteAdapter(R.id.stack_view, intent);
         remoteViews.setEmptyView(R.id.stack_view, R.id.empty_view);
 
-        Intent toastIntent = new Intent(context, FavoriteWidget.class);
-        toastIntent.setAction(FavoriteWidget.Toast_Act);
+        Intent toastIntent = new Intent(context, FavWidget.class);
+        toastIntent.setAction(FavWidget.Toast_Act);
         toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -57,10 +57,10 @@ public class FavoriteWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent){
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName thisAppWidget = new ComponentName(context.getPackageName(), FavoriteWidget.class.getName());
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+        ComponentName thisWidget = new ComponentName(context.getPackageName(), FavWidget.class.getName());
+        int[] appWidgetId = widgetManager.getAppWidgetIds(thisWidget);
+        widgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.stack_view);
 
         super.onReceive(context, intent);
     }

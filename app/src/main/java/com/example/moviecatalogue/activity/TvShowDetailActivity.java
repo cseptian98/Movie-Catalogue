@@ -9,23 +9,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.util.ShowHelper;
+import com.example.moviecatalogue.utility.ShowHelper;
 import com.squareup.picasso.Picasso;
 
-import static com.example.moviecatalogue.util.DataContract.CONTENT_URI_SHOW;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Backdrop;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Overview;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Poster;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Rate;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Release_date;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Title;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns._ID_Show;
+import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI_SHOW;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns._ID_Show;
 
 public class TvShowDetailActivity extends AppCompatActivity {
 
@@ -44,18 +42,11 @@ public class TvShowDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-
-        Toolbar toolbar2 = findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar2);
-        getSupportActionBar().setTitle(null);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         ImageView imgTvShow = findViewById(R.id.imgMovie);
         TextView tvTitle = findViewById(R.id.tvTitleDetail);
         TextView tvRelease = findViewById(R.id.tvReleaseDetail);
         TextView tvRate = findViewById(R.id.tvRateDetail);
         TextView tvOverview = findViewById(R.id.tvOverview);
-        ImageView backShow = findViewById(R.id.backMovie);
 
         final int showId = getIntent().getIntExtra(Extra_Id, 0);
         final String picShow = getIntent().getStringExtra(Extra_Image);
@@ -63,10 +54,8 @@ public class TvShowDetailActivity extends AppCompatActivity {
         final String releaseShow = getIntent().getStringExtra(Extra_Release);
         final String rateShow = getIntent().getStringExtra(Extra_Rate);
         final String overviewShow = getIntent().getStringExtra(Extra_Overview);
-        final String backdropShow = getIntent().getStringExtra(Extra_Backdrop);
 
         Picasso.with(context).load("https://image.tmdb.org/t/p/w300/" + picShow).into(imgTvShow);
-        Picasso.with(context).load("https://image.tmdb.org/t/p/w500/" + backdropShow).into(backShow);
 
         tvTitle.setText(titleShow);
         tvRelease.setText(releaseShow);
@@ -88,7 +77,6 @@ public class TvShowDetailActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put(_ID_Show, showId);
                 values.put(Poster, picShow);
-                values.put(Backdrop, backdropShow);
                 values.put(Title, titleShow);
                 values.put(Release_date, releaseShow);
                 values.put(Rate, rateShow);

@@ -1,4 +1,4 @@
-package com.example.moviecatalogue.util;
+package com.example.moviecatalogue.utility;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,7 +12,6 @@ public class DataContract {
     public static final class MovieColumns implements BaseColumns {
 
         public static String Poster = "poster";
-        public static String Backdrop = "backdrop";
         public static String Title = "title";
         public static String Release_date = "release_date";
         public static String Rate = "vote_average";
@@ -23,7 +22,6 @@ public class DataContract {
 
         public static String _ID_Show = "id_show";
         public static String Poster = "poster";
-        public static String Backdrop = "backdrop";
         public static String Title = "title";
         public static String Release_date = "release_date";
         public static String Rate = "vote_average";

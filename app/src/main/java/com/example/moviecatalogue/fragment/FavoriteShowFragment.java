@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.tvshow.FavoriteShowAdapter;
 
-import static com.example.moviecatalogue.util.DataContract.CONTENT_URI_SHOW;
+import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI_SHOW;
 
 /**
  * A simple {@link Fragment} subclass.

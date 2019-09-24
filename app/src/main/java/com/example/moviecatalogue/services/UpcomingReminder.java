@@ -1,11 +1,14 @@
 package com.example.moviecatalogue.services;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
@@ -25,27 +28,28 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-public class ReleaseTodayReminderService extends BroadcastReceiver {
-
-    public static final String Type_Repeating = "RepeatingAlarm";
-    public static final String Extra_Msg = "message";
-    public static final String Extra_Type = "type";
+public class UpcomingReminder extends BroadcastReceiver {
+    public static String CHANNEL_ID = "ch_01";
+    public static String CHANNEL_NAME = "Catalogue Channel";
+    public static final String Repeating = "RepeatingAlarm";
+    public static final String Message = "message";
+    public static final String Type = "type";
     private static final String API_KEY = "5f793d033ea33558e13b3664b3eadca9";
 
-    private final int Notif_Id_Onetime = 100;
-    private final int Notif_Id_Repeating = 101;
+    private final int Id_Onetime = 100;
+    private final int Id_Repeating = 101;
 
-    public ReleaseTodayReminderService() {
+    public UpcomingReminder() {
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         getTodayMovies(context);
     }
+
     private void showNotification(Context context, String title, String message, int notifId) {
-        NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notifId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -58,14 +62,26 @@ public class ReleaseTodayReminderService extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        notificationManagerCompat.notify(notifId, builder.build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            builder.setChannelId(CHANNEL_ID);
+            if (mNotificationManager != null) {
+                mNotificationManager.createNotificationChannel(channel);
+            }
+        }
+
+        Notification notification = builder.build();
+
+        if (mNotificationManager != null) {
+            mNotificationManager.notify(notifId, notification);
+        }
     }
 
     public void setMovieReleaseNotif(Context context, String type, String time) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(context, ReleaseTodayReminderService.class);
-        intent.putExtra(Extra_Type, type);
+        Intent intent = new Intent(context, UpcomingReminder.class);
+        intent.putExtra(Type, type);
 
         String timeArray[] = time.split(":");
 
@@ -76,7 +92,7 @@ public class ReleaseTodayReminderService extends BroadcastReceiver {
 
         if (calendar.before(Calendar.getInstance())) calendar.add(Calendar.DATE, 1);
 
-        int requestCode = Notif_Id_Repeating;
+        int requestCode = Id_Repeating;
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
@@ -84,9 +100,9 @@ public class ReleaseTodayReminderService extends BroadcastReceiver {
 
     public void cancelMovieNotif(Context context, String type) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, ReleaseTodayReminderService.class);
+        Intent intent = new Intent(context, UpcomingReminder.class);
 
-        int requestCode = type.equalsIgnoreCase(Type_Repeating) ? Notif_Id_Onetime : Notif_Id_Repeating;
+        int requestCode = type.equalsIgnoreCase(Repeating) ? Id_Onetime : Id_Repeating;
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
 
         alarmManager.cancel(pendingIntent);
@@ -111,7 +127,7 @@ public class ReleaseTodayReminderService extends BroadcastReceiver {
 
                         if (item.getRelease_date().equals(now)) {
                             String msg = String.format(context.getResources().getString(R.string.notif_msg_release),item.getTitle());
-                            showNotification(context, item.getTitle(), msg, Notif_Id_Repeating+i);
+                            showNotification(context, item.getTitle(), msg, Id_Repeating+i);
                         }
                     }
                 } catch (JSONException e) {

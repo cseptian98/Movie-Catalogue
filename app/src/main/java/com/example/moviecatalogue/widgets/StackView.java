@@ -11,21 +11,21 @@ import android.widget.RemoteViewsService;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.movie.Movie;
-import com.example.moviecatalogue.util.MovieHelper;
+import com.example.moviecatalogue.utility.MovieHelper;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+public class StackView implements RemoteViewsService.RemoteViewsFactory {
 
     public ArrayList<Movie> listMovie;
-    private Context nContext;
-    private int nAppWidgetId;
+    private Context newContext;
+    private int nAppWidget;
     private MovieHelper helper;
 
-    public StackRemoteViewsFactory(Context context, Intent intent){
-        nContext = context;
-        nAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+    public StackView(Context context, Intent intent){
+        newContext = context;
+        nAppWidget = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged(){
-        helper = new MovieHelper(nContext);
+        helper = new MovieHelper(newContext);
         helper.open();
         listMovie = new ArrayList<>();
         listMovie.addAll(helper.getData());
@@ -54,20 +54,20 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public RemoteViews getViewAt(int position){
-        RemoteViews rv = new RemoteViews(nContext.getPackageName(), R.layout.widget_item);
-        Bitmap bmp = null;
+        RemoteViews rv = new RemoteViews(newContext.getPackageName(), R.layout.widget_item);
+        Bitmap bitmap = null;
         try{
-            bmp = Picasso.with(nContext).load("https://image.tmdb.org/t/p/w300/"+listMovie.get(position).getBackdrop()).get();
+            bitmap = Picasso.with(newContext).load("https://image.tmdb.org/t/p/w300/"+listMovie.get(position).getBackdrop()).get();
         }
         catch (Exception e){
             e.printStackTrace();
         }
         Log.d("log",listMovie.get(position).getBackdrop());
-        rv.setImageViewBitmap(R.id.imageView, bmp);
+        rv.setImageViewBitmap(R.id.imageView, bitmap);
         rv.setTextViewText(R.id.tv_title, listMovie.get(position).getTitle());
 
         Bundle bundle = new Bundle();
-        bundle.putInt(FavoriteWidget.Extra_Item, position);
+        bundle.putInt(FavWidget.Extra_Item, position);
         Intent fillIntent = new Intent();
         fillIntent.putExtras(bundle);
         rv.setOnClickFillInIntent(R.id.imageView, fillIntent);

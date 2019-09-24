@@ -1,4 +1,4 @@
-package com.example.moviecatalogue.util;
+package com.example.moviecatalogue.utility;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,14 +10,8 @@ import com.example.moviecatalogue.tvshow.TvShow;
 
 import java.util.ArrayList;
 
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Backdrop;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Overview;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Poster;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Rate;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Release_date;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns.Title;
-import static com.example.moviecatalogue.util.DataContract.ShowColumns._ID_Show;
-import static com.example.moviecatalogue.util.DataContract.Tab_Favorite_Show;
+import static com.example.moviecatalogue.utility.DataContract.ShowColumns.*;
+import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite_Show;
 
 public class ShowHelper {
 
@@ -51,7 +45,6 @@ public class ShowHelper {
                 TvShow = new TvShow();
                 TvShow.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID_Show)));
                 TvShow.setImgShow(cursor.getString(cursor.getColumnIndexOrThrow(Poster)));
-                TvShow.setBackShow(cursor.getString(cursor.getColumnIndexOrThrow(Backdrop)));
                 TvShow.setTitleShow(cursor.getString(cursor.getColumnIndexOrThrow(Title)));
                 TvShow.setReleaseShow(cursor.getString(cursor.getColumnIndexOrThrow(Release_date)));
                 TvShow.setRateShow(cursor.getString(cursor.getColumnIndexOrThrow(Rate)));

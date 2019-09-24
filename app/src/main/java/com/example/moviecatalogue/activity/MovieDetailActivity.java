@@ -9,23 +9,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.util.MovieHelper;
+import com.example.moviecatalogue.utility.MovieHelper;
 import com.squareup.picasso.Picasso;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.util.DataContract.CONTENT_URI;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Backdrop;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Overview;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Poster;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Rate;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Release_date;
-import static com.example.moviecatalogue.util.DataContract.MovieColumns.Title;
+import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI;
+import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Overview;
+import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Poster;
+import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Rate;
+import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Release_date;
+import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Title;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -45,17 +43,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        Toolbar toolbar2 = findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar2);
-        getSupportActionBar().setTitle(null);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         ImageView imgMovie = findViewById(R.id.imgMovie);
         TextView tvTitle = findViewById(R.id.tvTitleDetail);
         TextView tvRelease = findViewById(R.id.tvReleaseDetail);
         TextView tvRate = findViewById(R.id.tvRateDetail);
         TextView tvOverview = findViewById(R.id.tvOverview);
-        ImageView backMovie = findViewById(R.id.backMovie);
 
         final int movieId = getIntent().getIntExtra(Extra_Id, 0);
         final String picMovie = getIntent().getStringExtra(Extra_Image);
@@ -63,10 +55,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         final String releaseMovie = getIntent().getStringExtra(Extra_Release);
         final String rateMovie = getIntent().getStringExtra(Extra_Rate);
         final String overviewMovie = getIntent().getStringExtra(Extra_Overview);
-        final String backdropMovie = getIntent().getStringExtra(Extra_Backdrop);
 
         Picasso.with(context).load("https://image.tmdb.org/t/p/w300/" + picMovie).into(imgMovie);
-        Picasso.with(context).load("https://image.tmdb.org/t/p/w500/" + backdropMovie).into(backMovie);
 
         tvTitle.setText(titleMovie);
         tvRelease.setText(releaseMovie);
@@ -88,7 +78,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
                 values.put(_ID, movieId);
                 values.put(Poster, picMovie);
-                values.put(Backdrop, backdropMovie);
                 values.put(Title, titleMovie);
                 values.put(Release_date, releaseMovie);
                 values.put(Rate, rateMovie);

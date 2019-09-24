@@ -1,10 +1,10 @@
-package com.example.moviecatalogue.preferences;
+package com.example.moviecatalogue.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-public class SettingPref {
+public class Settings {
     private String Key_Release = "upcoming";
     private String Key_Daily = "daily";
     private String Pref_Name = "UserPref";
@@ -13,7 +13,7 @@ public class SettingPref {
     private SharedPreferences.Editor editor;
     private Context context;
 
-    public SettingPref(Context context){
+    public Settings(Context context){
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
     }
