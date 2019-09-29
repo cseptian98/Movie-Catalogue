@@ -17,7 +17,7 @@ public class FavWidget extends AppWidgetProvider {
     public static final String Toast_Act = "com.example.moviecatalogue.Toast_Act";
     public static final String Extra_Item = "com.example.moviecatalogue.Extra_Item";
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId){
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
         Intent intent = new Intent(context, FavoriteWidget.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -39,24 +39,24 @@ public class FavWidget extends AppWidgetProvider {
     }
 
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
-        for(int appWidgetId : appWidgetIds){
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
 
     @Override
-    public void onEnabled(Context context){
+    public void onEnabled(Context context) {
 
     }
 
     @Override
-    public void onDisabled(Context context){
+    public void onDisabled(Context context) {
 
     }
 
     @Override
-    public void onReceive(Context context, Intent intent){
+    public void onReceive(Context context, Intent intent) {
         AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
         ComponentName thisWidget = new ComponentName(context.getPackageName(), FavWidget.class.getName());
         int[] appWidgetId = widgetManager.getAppWidgetIds(thisWidget);

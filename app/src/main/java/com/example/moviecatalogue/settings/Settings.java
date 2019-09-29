@@ -13,18 +13,18 @@ public class Settings {
     private SharedPreferences.Editor editor;
     private Context context;
 
-    public Settings(Context context){
+    public Settings(Context context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.context = context;
     }
 
-    public void SetDailyReminder(boolean check){
+    public void SetDailyReminder(boolean check) {
         editor = preferences.edit();
         editor.putBoolean(Key_Daily, check);
         editor.apply();
     }
 
-    public void SetReleaseReminder(boolean check){
+    public void SetReleaseReminder(boolean check) {
         editor = preferences.edit();
         editor.putBoolean(Key_Release, check);
         editor.apply();
@@ -34,7 +34,7 @@ public class Settings {
         return preferences.getBoolean(Key_Daily, false);
     }
 
-    public boolean releaseChecked(){
+    public boolean releaseChecked() {
         return preferences.getBoolean(Key_Release, false);
     }
 }

@@ -1,120 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBack"
-    android:fitsSystemWindows="true">
+    tools:context=".activity.MainActivity">
 
-    <ImageView
-        android:id="@+id/imgMovie"
-        android:layout_width="180dp"
-        android:layout_height="260dp"
-        android:layout_marginTop="10dp"
-        android:contentDescription="@string/judul_film"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvTitleDetail"
-        android:layout_width="214dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/judul_film"
-        android:textColor="@color/colorTitle"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/lblReleaseDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgMovie" />
-
-    <TextView
-        android:id="@+id/lblReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:drawableStart="@drawable/ic_date"
-        android:text="@string/release"
-        android:textColor="@color/colorTextDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleDetail" />
-
-    <TextView
-        android:id="@+id/tvReleaseDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/colorText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblReleaseDate"
-        tools:text="@string/release" />
-
-    <TextView
-        android:id="@+id/lblRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:drawableStart="@drawable/ic_star"
-        android:text="@string/rating"
-        android:textColor="@color/colorTextDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvReleaseDetail" />
-
-    <TextView
-        android:id="@+id/tvRateDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/colorText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblRate"
-        tools:text="@string/rating" />
-
-    <TextView
-        android:id="@+id/lblOverview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_info"
-        android:text="@string/ringkasan"
-        android:textColor="@color/colorTextDark"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRateDetail" />
-
-    <TextView
-        android:id="@+id/tvOverview"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="6dp"
-        android:textColor="@color/colorText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lblOverview"
-        tools:text="@string/ringkasan" />
+        android:background="@color/colorBack"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:id="@+id/imgMovie"
+            android:layout_width="180dp"
+            android:layout_height="260dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/judul_film"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitleDetail"
+            android:layout_width="214dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/judul_film"
+            android:textColor="@color/colorTitle"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/lblReleaseDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgMovie" />
+
+        <TextView
+            android:id="@+id/lblReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:drawableStart="@drawable/ic_date"
+            android:text="@string/release"
+            android:textColor="@color/colorTextDark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDetail" />
+
+        <TextView
+            android:id="@+id/tvReleaseDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblReleaseDate"
+            tools:text="@string/release" />
+
+        <TextView
+            android:id="@+id/lblRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:drawableStart="@drawable/ic_star"
+            android:text="@string/rating"
+            android:textColor="@color/colorTextDark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDetail" />
+
+        <TextView
+            android:id="@+id/tvRateDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblRate"
+            tools:text="@string/rating" />
+
+        <TextView
+            android:id="@+id/lblOverview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_info"
+            android:text="@string/ringkasan"
+            android:textColor="@color/colorTextDark"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRateDetail" />
+
+        <TextView
+            android:id="@+id/tvOverview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblOverview"
+            tools:text="@string/ringkasan" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabFavor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvOverview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:backgroundTint="@color/colorPrimaryDark"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_star_border" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabFavor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:layout_anchorGravity="bottom|end"
+            app:srcCompat="@drawable/ic_star_border" />
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

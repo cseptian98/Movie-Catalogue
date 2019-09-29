@@ -6,13 +6,13 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.example.moviecatalogue.utility.DataContract;
-import com.example.moviecatalogue.utility.MovieHelper;
-import com.example.moviecatalogue.utility.ShowHelper;
+import com.example.moviecatalogue.supports.DataContract;
+import com.example.moviecatalogue.supports.MovieHelper;
+import com.example.moviecatalogue.supports.ShowHelper;
 
-import static com.example.moviecatalogue.utility.DataContract.Author;
-import static com.example.moviecatalogue.utility.DataContract.Author_Show;
-import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI;
+import static com.example.moviecatalogue.supports.DataContract.Author;
+import static com.example.moviecatalogue.supports.DataContract.Author_Show;
+import static com.example.moviecatalogue.supports.DataContract.CONTENT_URI;
 
 public class DataProvider extends ContentProvider {
 

@@ -43,7 +43,7 @@ public class ShowFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ShowFragment newInstance(){
+    public static ShowFragment newInstance() {
         return new ShowFragment();
     }
 

@@ -1,10 +1,9 @@
 package com.example.moviecatalogue.fragment;
 
-
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -16,26 +15,21 @@ import android.widget.SearchView;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.movie.Movie;
 import com.example.moviecatalogue.movie.MovieAdapter;
-import com.example.moviecatalogue.movie.MovieLoader;
+import com.example.moviecatalogue.viewmodel.MovieViewModel;
 
 import java.util.ArrayList;
 
-public class SearchMovieFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Movie>> {
+public class SearchMovieFragment extends Fragment {
 
     RecyclerView listView;
     MovieAdapter adapter;
     SearchView keyword;
 
     private ArrayList<Movie> listMovie;
-
-    static final String Extra_Movie = "Extra_Movie";
+    private MovieViewModel movieViewModel;
 
     public SearchMovieFragment() {
         // Required empty public constructor
-    }
-
-    public static SearchMovieFragment newInstance(){
-        return new SearchMovieFragment();
     }
 
 
@@ -44,6 +38,9 @@ public class SearchMovieFragment extends Fragment implements LoaderManager.Loade
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movieViewModel.getMovie().observe(this, getMovie);
 
         keyword = view.findViewById(R.id.keyword);
         listView = view.findViewById(R.id.listMovie);
@@ -63,11 +60,9 @@ public class SearchMovieFragment extends Fragment implements LoaderManager.Loade
             public boolean onQueryTextSubmit(String query) {
                 String search = keyword.getQuery().toString();
 
-                if(TextUtils.isEmpty(search)) return false;
+                if (TextUtils.isEmpty(search)) return false;
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Extra_Movie, search);
-                getLoaderManager().restartLoader(0,bundle, SearchMovieFragment.this);
+                movieViewModel.setListMovie(search);
                 return false;
             }
 
@@ -75,42 +70,21 @@ public class SearchMovieFragment extends Fragment implements LoaderManager.Loade
             public boolean onQueryTextChange(String newText) {
                 String search = keyword.getQuery().toString();
 
-                if(TextUtils.isEmpty(search)) return false;
+                if (TextUtils.isEmpty(search)) return false;
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Extra_Movie, search);
-                getLoaderManager().restartLoader(0, bundle, SearchMovieFragment.this);
+                movieViewModel.setListMovie(search);
                 return false;
             }
         });
-
-        String title = keyword.getQuery().toString();
-        Bundle bundle = new Bundle();
-        bundle.putString(Extra_Movie, title);
-
-        getLoaderManager().initLoader(0, bundle, SearchMovieFragment.this);
-
         return view;
     }
 
-    @Override
-    public Loader<ArrayList<Movie>> onCreateLoader(int id, Bundle args){
-        String movie = "";
-        if(args != null){
-            movie = args.getString(Extra_Movie);
+    private Observer<ArrayList<Movie>> getMovie = new Observer<ArrayList<Movie>>() {
+        @Override
+        public void onChanged(ArrayList<Movie> movieItems) {
+            if (movieItems != null) {
+                adapter.setMovies(movieItems);
+            }
         }
-
-        return new MovieLoader(getActivity(), movie);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<ArrayList<Movie>> loader, ArrayList<Movie> data) {
-        adapter.setMovies(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<ArrayList<Movie>> loader){
-        adapter.setMovies(null);
-    }
-
+    };
 }

@@ -14,16 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.utility.ShowHelper;
+import com.example.moviecatalogue.supports.ShowHelper;
 import com.squareup.picasso.Picasso;
 
-import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI_SHOW;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Overview;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Poster;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Rate;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Release_date;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Title;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns._ID_Show;
+import static com.example.moviecatalogue.supports.DataContract.CONTENT_URI_SHOW;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns._ID_Show;
 
 public class TvShowDetailActivity extends AppCompatActivity {
 

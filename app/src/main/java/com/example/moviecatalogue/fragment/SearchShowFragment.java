@@ -1,10 +1,10 @@
 package com.example.moviecatalogue.fragment;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -16,28 +16,25 @@ import android.widget.SearchView;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.tvshow.TvShow;
 import com.example.moviecatalogue.tvshow.TvShowAdapter;
-import com.example.moviecatalogue.tvshow.TvShowLoader;
+import com.example.moviecatalogue.viewmodel.ShowViewModel;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchShowFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<TvShow>> {
+public class SearchShowFragment extends Fragment {
 
     RecyclerView listView;
     TvShowAdapter adapter;
     SearchView keyword;
 
     private ArrayList<TvShow> listShow;
-
-    static final String Extra_Show = "Extra_Show";
-
+    private ShowViewModel showViewModel;
 
     public SearchShowFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +43,9 @@ public class SearchShowFragment extends Fragment implements LoaderManager.Loader
 
         keyword = view.findViewById(R.id.keyword);
         listView = view.findViewById(R.id.listMovie);
+
+        showViewModel = ViewModelProviders.of(this).get(ShowViewModel.class);
+        showViewModel.getShow().observe(this, getShow);
 
         listView.setHasFixedSize(true);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -62,11 +62,9 @@ public class SearchShowFragment extends Fragment implements LoaderManager.Loader
             public boolean onQueryTextSubmit(String query) {
                 String search = keyword.getQuery().toString();
 
-                if(TextUtils.isEmpty(search)) return false;
+                if (TextUtils.isEmpty(search)) return false;
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Extra_Show, search);
-                getLoaderManager().restartLoader(0,bundle, SearchShowFragment.this);
+                showViewModel.setListShow(search);
                 return false;
             }
 
@@ -74,40 +72,22 @@ public class SearchShowFragment extends Fragment implements LoaderManager.Loader
             public boolean onQueryTextChange(String newText) {
                 String search = keyword.getQuery().toString();
 
-                if(TextUtils.isEmpty(search)) return false;
+                if (TextUtils.isEmpty(search)) return false;
 
-                Bundle bundle = new Bundle();
-                bundle.putString(Extra_Show, search);
-                getLoaderManager().restartLoader(0, bundle, SearchShowFragment.this);
+                showViewModel.setListShow(search);
                 return false;
             }
         });
-        String title = keyword.getQuery().toString();
-        Bundle bundle = new Bundle();
-        bundle.putString(Extra_Show, title);
-
-        getLoaderManager().initLoader(0, bundle, SearchShowFragment.this);
 
         return view;
     }
 
-    @Override
-    public Loader<ArrayList<TvShow>> onCreateLoader(int id, Bundle args){
-        String shows = "";
-        if(args != null){
-            shows = args.getString(Extra_Show);
+    private Observer<ArrayList<TvShow>> getShow = new Observer<ArrayList<TvShow>>() {
+        @Override
+        public void onChanged(ArrayList<TvShow> showItems) {
+            if (showItems != null) {
+                adapter.setTvShow(showItems);
+            }
         }
-
-        return new TvShowLoader(getActivity(), shows);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<ArrayList<TvShow>> loader, ArrayList<TvShow> data) {
-        adapter.setTvShow(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<ArrayList<TvShow>> loader){
-        adapter.setTvShow(null);
-    }
+    };
 }

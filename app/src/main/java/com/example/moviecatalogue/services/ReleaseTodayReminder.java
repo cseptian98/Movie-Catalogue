@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class UpcomingReminder extends BroadcastReceiver {
+public class ReleaseTodayReminder extends BroadcastReceiver {
     public static String CHANNEL_ID = "ch_01";
     public static String CHANNEL_NAME = "Catalogue Channel";
     public static final String Repeating = "RepeatingAlarm";
@@ -40,7 +40,7 @@ public class UpcomingReminder extends BroadcastReceiver {
     private final int Id_Onetime = 100;
     private final int Id_Repeating = 101;
 
-    public UpcomingReminder() {
+    public ReleaseTodayReminder() {
     }
 
     @Override
@@ -80,7 +80,7 @@ public class UpcomingReminder extends BroadcastReceiver {
     public void setMovieReleaseNotif(Context context, String type, String time) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(context, UpcomingReminder.class);
+        Intent intent = new Intent(context, ReleaseTodayReminder.class);
         intent.putExtra(Type, type);
 
         String timeArray[] = time.split(":");
@@ -100,7 +100,7 @@ public class UpcomingReminder extends BroadcastReceiver {
 
     public void cancelMovieNotif(Context context, String type) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, UpcomingReminder.class);
+        Intent intent = new Intent(context, ReleaseTodayReminder.class);
 
         int requestCode = type.equalsIgnoreCase(Repeating) ? Id_Onetime : Id_Repeating;
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
@@ -111,8 +111,8 @@ public class UpcomingReminder extends BroadcastReceiver {
     public void getTodayMovies(final Context context) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         final String now = dateFormat.format(Calendar.getInstance().getTime());
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&primary_release_date.gte=" +
-                ""+now+"&primary_release_date.lte="+now+"";
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&primary_release_date.gte=" +
+                "" + now + "&primary_release_date.lte=" + now + "";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -120,14 +120,14 @@ public class UpcomingReminder extends BroadcastReceiver {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray array = jsonObject.getJSONArray("results");
-                    for (int i = 0; i < array.length(); i++){
+                    for (int i = 0; i < array.length(); i++) {
 
                         JSONObject obj = array.getJSONObject(i);
                         Movie item = new Movie(obj);
 
                         if (item.getRelease_date().equals(now)) {
-                            String msg = String.format(context.getResources().getString(R.string.notif_msg_release),item.getTitle());
-                            showNotification(context, item.getTitle(), msg, Id_Repeating+i);
+                            String msg = String.format(context.getResources().getString(R.string.notif_msg_release), item.getTitle());
+                            showNotification(context, item.getTitle(), msg, Id_Repeating + i);
                         }
                     }
                 } catch (JSONException e) {

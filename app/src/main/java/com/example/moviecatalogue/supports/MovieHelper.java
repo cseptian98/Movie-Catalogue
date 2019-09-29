@@ -1,4 +1,4 @@
-package com.example.moviecatalogue.utility;
+package com.example.moviecatalogue.supports;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,8 +11,12 @@ import com.example.moviecatalogue.movie.Movie;
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.utility.DataContract.MovieColumns.*;
-import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Overview;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Poster;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Rate;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Release_date;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Title;
+import static com.example.moviecatalogue.supports.DataContract.Tab_Favorite;
 
 public class MovieHelper {
 

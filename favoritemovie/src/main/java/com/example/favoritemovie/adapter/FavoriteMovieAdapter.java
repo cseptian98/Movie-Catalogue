@@ -16,8 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.example.favoritemovie.util.DataContract.MovieColumns.*;
-import static com.example.favoritemovie.util.DataContract.getColumnString;
+import static com.example.favoritemovie.supports.DataContract.MovieColumns.*;
+import static com.example.favoritemovie.supports.DataContract.getColumnString;
 
 public class FavoriteMovieAdapter extends CursorAdapter {
     private Cursor listMovie;

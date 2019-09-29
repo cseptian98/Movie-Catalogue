@@ -8,7 +8,7 @@ import com.example.moviecatalogue.widgets.StackView;
 public class FavoriteWidget extends RemoteViewsService {
 
     @Override
-    public RemoteViewsFactory onGetViewFactory(Intent intent){
+    public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new StackView(this.getApplicationContext(), intent);
     }
 }

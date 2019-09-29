@@ -25,9 +25,9 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     private Context context;
     private ArrayList<TvShow> tvShows;
 
-    public void setTvShow(ArrayList<TvShow> tvShows) {
+    public void setTvShow(ArrayList<TvShow> items) {
         tvShows.clear();
-        tvShows.addAll(tvShows);
+        tvShows.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -53,7 +53,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
                 .into(holder.imgShow);
 
         holder.tvTitleShow.setText(tvShows.get(pos).getTitleShow());
-        holder.tvRateShow.setText(tvShows.get(pos).getRateShow());String mReleaseDate = tvShows.get(pos).getReleaseShow();
+        holder.tvReleaseShow.setText(tvShows.get(pos).getReleaseShow());
+        /*String mReleaseDate = tvShows.get(pos).getReleaseShow();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(mReleaseDate);
@@ -64,7 +65,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
 
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
+        holder.tvRateShow.setText(tvShows.get(pos).getRateShow());
 
         holder.itemShow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +82,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
                 intent.putExtra(TvShowDetailActivity.Extra_Release, item.getReleaseShow());
                 intent.putExtra(TvShowDetailActivity.Extra_Overview, item.getOverviewShow());
                 intent.putExtra(TvShowDetailActivity.Extra_Rate, item.getRateShow());
-                intent.putExtra(TvShowDetailActivity.Extra_Backdrop, item.getBackShow());
 
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
     }

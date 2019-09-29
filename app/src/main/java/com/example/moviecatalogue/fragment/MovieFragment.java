@@ -43,7 +43,7 @@ public class MovieFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MovieFragment newInstance(){
+    public static MovieFragment newInstance() {
         return new MovieFragment();
     }
 

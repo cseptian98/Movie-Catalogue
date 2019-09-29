@@ -14,16 +14,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
-import com.example.moviecatalogue.utility.MovieHelper;
+import com.example.moviecatalogue.supports.MovieHelper;
 import com.squareup.picasso.Picasso;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI;
-import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Overview;
-import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Poster;
-import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Rate;
-import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Release_date;
-import static com.example.moviecatalogue.utility.DataContract.MovieColumns.Title;
+import static com.example.moviecatalogue.supports.DataContract.CONTENT_URI;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Overview;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Poster;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Rate;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Release_date;
+import static com.example.moviecatalogue.supports.DataContract.MovieColumns.Title;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -33,7 +33,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     public static String Extra_Release = "Extra_Release";
     public static String Extra_Overview = "Extra_Overview";
     public static String Extra_Rate = "Extra_Rate";
-    public static String Extra_Backdrop = "Extra_Backdrop";
 
     public Context context;
     public MovieHelper helper;

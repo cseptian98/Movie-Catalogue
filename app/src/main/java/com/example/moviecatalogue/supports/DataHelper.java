@@ -1,18 +1,18 @@
-package com.example.moviecatalogue.utility;
+package com.example.moviecatalogue.supports;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Overview;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Poster;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Rate;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Release_date;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.Title;
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns._ID_Show;
-import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite;
-import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite_Show;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns._ID_Show;
+import static com.example.moviecatalogue.supports.DataContract.Tab_Favorite;
+import static com.example.moviecatalogue.supports.DataContract.Tab_Favorite_Show;
 
 public class DataHelper extends SQLiteOpenHelper {
 

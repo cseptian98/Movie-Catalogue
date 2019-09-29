@@ -16,9 +16,9 @@ import android.widget.ListView;
 
 import com.example.favoritemovie.R;
 import com.example.favoritemovie.adapter.FavoriteMovieAdapter;
-import com.example.favoritemovie.util.DataContract;
+import com.example.favoritemovie.supports.DataContract;
 
-import static com.example.favoritemovie.util.DataContract.CONTENT_URI;
+import static com.example.favoritemovie.supports.DataContract.CONTENT_URI;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         rv = findViewById(R.id.listFav);
-        adapter = new FavoriteMovieAdapter(this, null,true);
+        adapter = new FavoriteMovieAdapter(this, null, true);
         rv.setAdapter(adapter);
         rv.setOnItemClickListener(this);
 
@@ -41,21 +41,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         getSupportLoaderManager().restartLoader(Load_Movie_Id, null, this);
     }
 
     @NonNull
     @Override
-    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args){
-        return new CursorLoader(this, CONTENT_URI, null, null,null,null);
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        return new CursorLoader(this, CONTENT_URI, null, null, null, null);
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data){
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         adapter.swapCursor(data);
     }
+
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         adapter.swapCursor(null);

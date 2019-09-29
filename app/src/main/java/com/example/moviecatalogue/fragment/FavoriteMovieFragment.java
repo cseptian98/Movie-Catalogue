@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.movie.FavoriteMovieAdapter;
 
-import static com.example.moviecatalogue.utility.DataContract.CONTENT_URI;
+import static com.example.moviecatalogue.supports.DataContract.CONTENT_URI;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +47,7 @@ public class FavoriteMovieFragment extends Fragment {
 
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -61,7 +62,7 @@ public class FavoriteMovieFragment extends Fragment {
 
         @Override
         public Cursor doInBackground(Void... voids) {
-            return getActivity().getApplicationContext().getContentResolver().query(CONTENT_URI,null,null,null,null);
+            return getActivity().getApplicationContext().getContentResolver().query(CONTENT_URI, null, null, null, null);
         }
 
         @Override

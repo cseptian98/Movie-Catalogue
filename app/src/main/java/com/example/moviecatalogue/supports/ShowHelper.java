@@ -1,4 +1,4 @@
-package com.example.moviecatalogue.utility;
+package com.example.moviecatalogue.supports;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,8 +10,13 @@ import com.example.moviecatalogue.tvshow.TvShow;
 
 import java.util.ArrayList;
 
-import static com.example.moviecatalogue.utility.DataContract.ShowColumns.*;
-import static com.example.moviecatalogue.utility.DataContract.Tab_Favorite_Show;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Overview;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Poster;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Rate;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Release_date;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns.Title;
+import static com.example.moviecatalogue.supports.DataContract.ShowColumns._ID_Show;
+import static com.example.moviecatalogue.supports.DataContract.Tab_Favorite_Show;
 
 public class ShowHelper {
 

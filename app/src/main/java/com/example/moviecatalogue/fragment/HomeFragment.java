@@ -2,6 +2,7 @@ package com.example.moviecatalogue.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,27 +19,30 @@ import com.example.moviecatalogue.R;
  */
 public class HomeFragment extends Fragment {
 
-    private SectionPagerAdapter sectionPagerAdapter;
-    private ViewPager viewPager;
+    TabLayout tabLayout;
+    SectionPagerAdapter sectionPagerAdapter;
+    ViewPager viewPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
-
         viewPager = view.findViewById(R.id.container);
-        viewPager.setAdapter(sectionPagerAdapter);
-
-        TabLayout tabLayout = view.findViewById(R.id.tab);
-
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        tabLayout = view.findViewById(R.id.tab);
 
         return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        sectionPagerAdapter = new SectionPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(sectionPagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+    }
+
 
     public class SectionPagerAdapter extends FragmentPagerAdapter {
 

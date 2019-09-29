@@ -1,7 +1,5 @@
 package com.example.moviecatalogue.fragment;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.services.DailyReminder;
-import com.example.moviecatalogue.services.UpcomingReminder;
+import com.example.moviecatalogue.services.ReleaseTodayReminder;
 import com.example.moviecatalogue.settings.Settings;
 
 /**
@@ -24,16 +21,15 @@ public class SettingFragment extends Fragment {
     private Settings preferences;
 
     Switch daily, release;
-    TextView language;
 
     DailyReminder dailyReminder;
-    UpcomingReminder releaseTodayTask;
+    ReleaseTodayReminder releaseToday;
 
     public SettingFragment() {
         // Required empty public constructor
     }
 
-    public static SettingFragment newInstance(){
+    public static SettingFragment newInstance() {
         return new SettingFragment();
     }
 
@@ -46,11 +42,10 @@ public class SettingFragment extends Fragment {
         preferences = new Settings(getContext());
 
         dailyReminder = new DailyReminder();
-        releaseTodayTask = new UpcomingReminder();
+        releaseToday = new ReleaseTodayReminder();
 
         daily = view.findViewById(R.id.switch_daily_reminder);
         release = view.findViewById(R.id.switch_release_today);
-        language = view.findViewById(R.id.tv_change_language);
 
         daily.setChecked(preferences.dailyChecked());
         release.setChecked(preferences.releaseChecked());
@@ -59,7 +54,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean checked = daily.isChecked();
-                if(checked){
+                if (checked) {
                     dailyReminder.setDailyReminder(getContext(),
                             DailyReminder.Repeating, "07:00", getString(R.string.notif_msg));
                 } else {
@@ -73,22 +68,14 @@ public class SettingFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean checked = release.isChecked();
-                if(checked) {
-                    releaseTodayTask.setMovieReleaseNotif(getContext(),
-                            UpcomingReminder.Repeating, "08:00");
+                if (checked) {
+                    releaseToday.setMovieReleaseNotif(getContext(),
+                            ReleaseTodayReminder.Repeating, "08:00");
                 } else {
-                    releaseTodayTask.cancelMovieNotif(getContext(),
-                            UpcomingReminder.Repeating);
+                    releaseToday.cancelMovieNotif(getContext(),
+                            ReleaseTodayReminder.Repeating);
                 }
                 preferences.SetReleaseReminder(checked);
-            }
-        });
-
-        language.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS);
-                startActivity(i);
             }
         });
         return view;

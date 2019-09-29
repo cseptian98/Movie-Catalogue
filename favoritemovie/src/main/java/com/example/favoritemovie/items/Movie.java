@@ -1,13 +1,13 @@
-package com.example.favoritemovie.entity;
+package com.example.favoritemovie.items;
 
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.favoritemovie.util.DataContract;
+import com.example.favoritemovie.supports.DataContract;
 
-import static com.example.favoritemovie.util.DataContract.getColumnInt;
-import static com.example.favoritemovie.util.DataContract.getColumnString;
+import static com.example.favoritemovie.supports.DataContract.getColumnInt;
+import static com.example.favoritemovie.supports.DataContract.getColumnString;
 
 public class Movie implements Parcelable {
     private int id;
@@ -16,7 +16,6 @@ public class Movie implements Parcelable {
     private String title;
     private String release_date;
     private String overview;
-    private String backdrop;
 
     public Movie(Cursor cursor) {
         this.id = getColumnInt(cursor, DataContract.MovieColumns._ID);
@@ -25,7 +24,6 @@ public class Movie implements Parcelable {
         this.overview = getColumnString(cursor, DataContract.MovieColumns.Overview);
         this.release_date = getColumnString(cursor, DataContract.MovieColumns.Release_date);
         this.rate = getColumnString(cursor, DataContract.MovieColumns.Rate);
-        this.backdrop = getColumnString(cursor, DataContract.MovieColumns.Backdrop);
     }
 
     public int getId() {
@@ -38,14 +36,6 @@ public class Movie implements Parcelable {
 
     public String getRate() {
         return rate;
-    }
-
-    public String getBackdrop() {
-        return backdrop;
-    }
-
-    public void setBackdrop(String backdrop) {
-        this.backdrop = backdrop;
     }
 
     public void setRate(String rate) {
@@ -97,7 +87,6 @@ public class Movie implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.release_date);
         dest.writeString(this.overview);
-        dest.writeString(this.backdrop);
     }
 
     protected Movie(Parcel in) {
@@ -107,7 +96,6 @@ public class Movie implements Parcelable {
         this.title = in.readString();
         this.release_date = in.readString();
         this.overview = in.readString();
-        this.backdrop = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {

@@ -4,26 +4,26 @@
     <item
         android:id="@+id/navMovies"
         android:icon="@drawable/ic_local_movies"
-        android:title=""/>
+        android:title="Movies" />
 
     <item
         android:id="@+id/navTvShow"
         android:icon="@drawable/ic_live_tv"
-        android:title=""/>
+        android:title="Tv Show" />
 
     <item
         android:id="@+id/navSearch"
         android:icon="@drawable/ic_search"
-        android:title=""/>
+        android:title="Search" />
 
     <item
         android:id="@+id/navFavorite"
         android:icon="@drawable/ic_star"
-        android:title=""/>
+        android:title="Favorite" />
 
     <item
         android:id="@+id/navSetting"
         android:icon="@drawable/ic_language"
-        android:title=""/>
+        android:title="Setting" />
 
 </menu>
