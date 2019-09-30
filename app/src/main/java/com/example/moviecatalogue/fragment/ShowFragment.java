@@ -2,6 +2,8 @@ package com.example.moviecatalogue.fragment;
 
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.tvshow.TvShow;
 import com.example.moviecatalogue.tvshow.TvShowAdapter;
+import com.example.moviecatalogue.viewmodel.ShowViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +35,11 @@ import java.util.ArrayList;
  */
 public class ShowFragment extends Fragment {
 
-    private RecyclerView rv;
-    private RecyclerView.Adapter adapter;
-    private View view;
-    private ArrayList<TvShow> shows;
+    RecyclerView rv;
+    TvShowAdapter adapter;
+    View view;
+    ArrayList<TvShow> shows;
+    ShowViewModel showViewModel;
 
     private static final String API_URL = "https://api.themoviedb.org/3/tv/top_rated?api_key=5f793d033ea33558e13b3664b3eadca9&language=en-US";
 
@@ -53,6 +57,9 @@ public class ShowFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_show, container, false);
 
+        showViewModel = ViewModelProviders.of(getActivity()).get(ShowViewModel.class);
+        showViewModel.getShow().observe(this, getShow);
+
         rv = view.findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -62,6 +69,15 @@ public class ShowFragment extends Fragment {
 
         return view;
     }
+
+    private Observer<ArrayList<TvShow>> getShow = new Observer<ArrayList<TvShow>>() {
+        @Override
+        public void onChanged(ArrayList<TvShow> showItems) {
+            if (showItems != null) {
+                adapter.setTvShow(showItems);
+            }
+        }
+    };
 
     public void loadTVShow() {
         final ProgressDialog dialogShow = new ProgressDialog(getActivity());

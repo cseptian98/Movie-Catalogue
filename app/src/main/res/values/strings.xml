@@ -5,9 +5,9 @@
     <string name="ringkasan">Overview</string>
     <string name="durasi">Duration</string>
     <string name="read_more">Read More</string>
-    <string name="movies">MOVIES</string>
-    <string name="tv_show">TV SHOW</string>
-    <string name="language">Setting Language</string>
+    <string name="movies">Movies</string>
+    <string name="tv_show">Tv Show</string>
+    <string name="language">Change Language</string>
     <string name="load">Loading...</string>
     <string name="rating">Rating</string>
     <string name="home">Home</string>
@@ -30,7 +30,9 @@
     <string name="notif_msg_release">Today %s Relase</string>
     <string name="daily_notif">Daily Reminder</string>
     <string name="upcoming_notif">Release Today Reminder</string>
-    <string name="notif_msg">Movie Catalogue missing you ...</string>
+    <string name="notif_msg">Movie Catalogue have news for you...</string>
     <string name="search_movie">Search Movie</string>
     <string name="search_tv_show">Search Tv Show</string>
+    <string name="search">Search</string>
+    <string name="reminder">Reminder</string>
 </resources>

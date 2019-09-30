@@ -63,7 +63,6 @@ public class StackView implements RemoteViewsService.RemoteViewsFactory {
         }
         Log.d("log", listMovie.get(position).getPic());
         rv.setImageViewBitmap(R.id.imageView, bitmap);
-        rv.setTextViewText(R.id.tv_title, listMovie.get(position).getTitle());
 
         Bundle bundle = new Bundle();
         bundle.putInt(FavWidget.Extra_Item, position);

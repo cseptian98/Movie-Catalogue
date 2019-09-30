@@ -2,6 +2,9 @@ package com.example.moviecatalogue.fragment;
 
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.movie.Movie;
 import com.example.moviecatalogue.movie.MovieAdapter;
+import com.example.moviecatalogue.viewmodel.MovieViewModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +36,11 @@ import java.util.ArrayList;
  */
 public class MovieFragment extends Fragment {
 
-    private RecyclerView rv;
-    private RecyclerView.Adapter adapter;
-    private View view;
-    private ArrayList<Movie> movies;
+    RecyclerView rv;
+    MovieAdapter adapter;
+    View view;
+    ArrayList<Movie> movies;
+    MovieViewModel movieViewModel;
 
     private static final String API_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=5f793d033ea33558e13b3664b3eadca9&language=en-US";
 
@@ -52,6 +57,9 @@ public class MovieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_movie, container, false);
+
+        movieViewModel = ViewModelProviders.of(getActivity()).get(MovieViewModel.class);
+        movieViewModel.getMovie().observe(this, getMovie);
 
         rv = view.findViewById(R.id.recycle_view);
         rv.setHasFixedSize(true);
@@ -115,4 +123,13 @@ public class MovieFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }
+
+    private Observer<ArrayList<Movie>> getMovie = new Observer<ArrayList<Movie>>() {
+        @Override
+        public void onChanged(ArrayList<Movie> movieItems) {
+            if (movieItems != null) {
+                adapter.setMovies(movieItems);
+            }
+        }
+    };
 }

@@ -16,7 +16,7 @@ import static com.example.moviecatalogue.supports.DataContract.Tab_Favorite_Show
 
 public class DataHelper extends SQLiteOpenHelper {
 
-    private static String DATABASE_NAME = "db_movie";
+    private static String DATABASE_NAME = "db_catalogue";
     private static final int DATABASE_VERSION = 1;
 
     public static String CREATE_TABLE_FAVORITE = "create table " + Tab_Favorite + "(" +

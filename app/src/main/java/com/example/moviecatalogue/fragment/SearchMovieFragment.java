@@ -39,7 +39,7 @@ public class SearchMovieFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movieViewModel = ViewModelProviders.of(getActivity()).get(MovieViewModel.class);
         movieViewModel.getMovie().observe(this, getMovie);
 
         keyword = view.findViewById(R.id.keyword);

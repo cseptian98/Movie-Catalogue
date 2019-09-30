@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import com.example.moviecatalogue.R;
 import com.example.moviecatalogue.activity.MainActivity;
@@ -42,6 +43,7 @@ public class DailyReminder extends BroadcastReceiver {
         title = context.getResources().getString(R.string.app_name);
 
         showNotification(context, title, message, Id);
+        Log.d("Bebas", "BEBAS");
     }
 
     public void showNotification(Context context, String title, String message, int Id) {

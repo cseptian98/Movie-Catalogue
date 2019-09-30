@@ -56,7 +56,7 @@ public class SettingFragment extends Fragment {
                 boolean checked = daily.isChecked();
                 if (checked) {
                     dailyReminder.setDailyReminder(getContext(),
-                            DailyReminder.Repeating, "07:00", getString(R.string.notif_msg));
+                            DailyReminder.Repeating, "08:35", getString(R.string.notif_msg));
                 } else {
                     dailyReminder.cancelDailyReminder(getContext(),
                             DailyReminder.Repeating);
@@ -70,7 +70,7 @@ public class SettingFragment extends Fragment {
                 boolean checked = release.isChecked();
                 if (checked) {
                     releaseToday.setMovieReleaseNotif(getContext(),
-                            ReleaseTodayReminder.Repeating, "08:00");
+                            ReleaseTodayReminder.Repeating, "08:28");
                 } else {
                     releaseToday.cancelMovieNotif(getContext(),
                             ReleaseTodayReminder.Repeating);
